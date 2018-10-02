@@ -44,6 +44,9 @@ CMD [ "pwsh","-command","& ./tmp/helloworldud-example.ps1" ]
 
 Open a PowerShell session and make sure you have installed the Docker for Windows Client if you are running Windows 10.
 
+Remark:
+If you are using the Docker for Windows Client make sure you have switched to Linux Containers in the settings.
+
 ```powershell
 # Create Universal Dashboard Container image
 docker build --rm -f "universaldashboard\dockerfile" -t universaldashboard:latest universaldashboard
