@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Automatically generating PowerShell cmdlets to manage or access a RESTful Web Service?
+categories: [REST API, PowerShell]
+tags: [REST API, PowerShell]
 ---
 # Automatically generating PowerShell cmdlets to manage or access a RESTful Web Service?
 
