@@ -4,7 +4,6 @@ title: Automatically generating PowerShell cmdlets to manage or access a RESTful
 categories: [REST API, PowerShell]
 tags: [REST API, PowerShell]
 ---
-# Automatically generating PowerShell cmdlets to manage or access a RESTful Web Service?
 
 This week there was a conversation on Twitter about creating a WorldCup PowerShell Module using PSSwagger.
 
