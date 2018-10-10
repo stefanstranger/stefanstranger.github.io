@@ -190,7 +190,7 @@ Set-AzureRmContext -SubscriptionId $subscription.Id -TenantId $subscription.Tena
 #endregion
 
 #region variables
-$ARMTemplateFile = 'C:\Users\stefstr\Source\Repos\Contoso\Products\WebAppContainer\Templates\WebAppContainerPrereqs.json'
+$ARMTemplateFile = 'C:\Users\[username]\Source\Repos\Contoso\Products\WebAppContainer\Templates\WebAppContainerPrereqs.json'
 #endregion
 
 #region create ARM Template Parameter object
@@ -226,7 +226,7 @@ $result
 
 After deploying the above ARM Template you would see the following Azure Resource Deployed.
 
-![](/assets/webapplinux_1.png)
+![Azure Resources Deployed in Azure Portal](/assets/webapplinux_1.png)
 
 ## Build Docker image and Push Docker image to Azure Container Registry
 
@@ -235,10 +235,10 @@ You could use the Azure DevOps Pipelines to build a Docker container and push th
 ### Build the image from the Docker file
 Read my earlier blog post "<a href="https://stefanstranger.github.io/powershell/2018/10/02/RunningUniversalDashboardinALinuxDockerContainer.html" target="_blank">Running Universal Dashboard in a Linux Docker Container</a>" to see how you can build a (Linux) Docker image with an example Universal Dashboard.
 
-![](/assets/webapplinux_5.png)
+![Docker Build command screenshot](/assets/webapplinux_5.png)
 
 Result:
-![](/assets/webapplinux_6.png)
+![Result of Docker Build Command](/assets/webapplinux_6.png)
 
 ### Push the Docker image to Azure Container Registry
 
@@ -248,21 +248,21 @@ In order to push an image to the registry, you need to supply credentials so the
 ```powershell
 Get-AzureRmContainerRegistryCredential -ResourceGroupName $ResourceGroupName -Name $acrName
 ```
-![](/assets/webapplinux_2.png)
+![Container Registry Credential Screenshot](/assets/webapplinux_2.png)
 
 Retrieve Login Server name of Azure Container Registry:
 ```powershell
 Get-AzureRmContainerRegistry -ResourceGroupName $ResourceGroupName -Name $acrName | Select-Object Name, LoginServer, ResourceGroupName
 ```
 
-![](/assets/webapplinux_3.png)
+![Container Registry properties screenshot](/assets/webapplinux_3.png)
 
 From your local terminal window, log in to the Azure Container Registry using the docker login command. The server name is required to log in. Use the format azure-container-registry-name>.azurecr.io. Type in your password into the console at the prompt.
 
 ```bash
 docker login udcontainerregistry.azurecr.io --username UDContainerRegistry
 ```
-![](/assets/webapplinux_4.png)
+![login to azure container registry screenshot](/assets/webapplinux_4.png)
 
 #### Push an image to Azure Container Registry
 
@@ -274,15 +274,15 @@ docker tag udcontainerregistry.azurecr.io/udhelloworld
 ```
 The tag was already added during the build of the docker image step.
 
-![](/assets/webapplinux_7.png)
+![tag docker image screenshot](/assets/webapplinux_7.png)
 
 **Remark:**
 
 This can take some time before the push to the Azure Container Registry is finished. So get yourself a cup of coffee or go for lunch and wait for the push to be finished. If you do this step in your Azure DevOps Pipeline is way faster in my experience.
 
-![](/assets/webapplinux_8.png)
+![Docker images overview screenshot](/assets/webapplinux_8.png)
 
-![](/assets/webapplinux_9.png)
+![Azure Portal ACS Repository screenshot](/assets/webapplinux_9.png)
 
 PowerShell script to push the docker image to the ACR:
 ```powershell
@@ -583,7 +583,7 @@ $result
 ```
 
 Result:
-![](/assets/webapplinux_10.png)
+![Azure Portal Resources deployed screenshot](/assets/webapplinux_10.png)
 
 
 Hope you learned something new with this blog post.
