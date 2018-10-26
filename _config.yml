@@ -40,7 +40,7 @@ plugins:
   - jekyll-paginate
 
 # Exclude
-exclude: ['README.md
+exclude: ['README.md']
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
