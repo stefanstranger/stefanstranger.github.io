@@ -1,13 +1,10 @@
 ---
+layout: post
 title: Azur Logic Apps - Schedule your Runbooks more often than every hour
-abstract: Schedule your Runbook with Logic Apps
-keywords: Azure, Automation, Runbook, Logic App, PowerShell
-categories: Azure, Automation, Runbook, Logic App, PowerShell
-weblogName: TechNet Blog
-postId: 12535
+categories: [Azure, Automation, Runbook, Logic App, PowerShell]
+tags: [Azure, Automation, Runbook, Logic App, PowerShell]
+comments: true
 ---
-# Azur Logic Apps - Schedule your Runbooks more often than every hour
-
 In my last <a href="https://blogs.technet.microsoft.com/stefan_stranger/2017/06/21/azure-scheduler-schedule-your-runbooks-more-often-than-every-hour/" target="_blank">blog post</a> I explained how you could use Azure Scheduler to have your Runbooks run more than every hour.
 
 But I learned from <a href="https://twitter.com/MrTaoYang/status/877825560071634944" target="_blank">Tao Yang via Twitter</a> that you could also use **Azure Logic Apps** to have your Runbooks scheduled more often than every hour in Azure Automation.
