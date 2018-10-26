@@ -1,18 +1,4 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# Site wide configuration
 title: Stefan Stranger's Blog
 description: >- # this means to ignore newlines until "baseurl:"
   This is my personal blog. I work at Microsoft as a Consultant. 
@@ -20,8 +6,30 @@ description: >- # this means to ignore newlines until "baseurl:"
   I like to share my knowledge about Azure, PowerShell and DevOps
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://stefanstranger.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: sstranger
-github_username:  stefanstranger
+
+
+# Owner configuration
+# name and email are required (change code to remove these)
+# (leave the rest blank to disable the corresponding sharing button)
+owner:
+    name: Stefan Stranger
+    github: stefanstranger
+    twitter: sstranger
+    linkedin: stefanstranger
+    facebook:
+    google_plus:
+    youtube:
+
+# Post sharing icons
+sharing:
+    twitter: true
+    linkedin: true
+    facebook: true
+    google_plus: true
+    reddit: true
+
+# Disqus comments configuration (leave blank to disable comments)
+disqus_shortname: 'stefanstranger'
 
 # Build settings
 markdown: kramdown
@@ -29,6 +37,10 @@ theme: minima
 plugins:
   - jekyll-feed
   - jemoji
+  - jekyll-paginate
+
+# Exclude
+exclude: ['README.md
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
