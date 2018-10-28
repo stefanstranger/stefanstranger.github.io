@@ -23,12 +23,34 @@ url: "https://stefanstranger.github.io" # the base hostname & protocol for your 
 twitter_username: sstranger
 github_username:  stefanstranger
 
+# Owner configuration
+# name and email are required (change code to remove these)
+# (leave the rest blank to disable the corresponding sharing button)
+owner:
+    name: Stefan Stranger
+    email: stefan@stranger.nl
+    github: stefanstranger
+    twitter: sstranger
+    linkedin: stefanstranger
+    facebook:
+    google_plus:
+    youtube:
+
+
+# Disqus comments configuration (leave blank to disable comments)
+disqus_shortname: 'stefanstranger'
+
+# Jekyll configuration
+permalink: /:year/:month/:day/:title/
+# paginate: 8
+
 # Build settings
 markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
-  - jemoji
+# - jekyll-paginate
+# - jemoji
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
