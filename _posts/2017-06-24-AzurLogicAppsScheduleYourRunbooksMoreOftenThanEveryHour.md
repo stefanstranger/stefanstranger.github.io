@@ -32,7 +32,7 @@ Write-Output "Hello $firstname $lastname"
 
 This Runbook has two parameters firstname and lastname and when you test this Runbook you should get the following output.
 
-![](Output.png)
+![](/assets/Output.png)
 
 Publish the Runbook when you are happy with the result.
 
@@ -48,45 +48,45 @@ Click on the Plus sign in the Portal and search for Logic App.
 
 Click on Create button to continue with the creation of the Logic App.
 
-![](step1b.png)
+![](/assets/step1b.png)
 
 Step 2. Configure Logic App
 
 Enter properties for Logic App and click on Create button.
 
-![](step2.png)
+![](/assets/step2.png)
 
-![](step1.png)
+![](/assets/step1.png)
 
 Step 3. Open Logic App Designer for Logic App
 
-![](step3.png)
+![](/assets/step3.png)
 
 Configure the trigger Recurrence. Select the Recurrence trigger to have the Runbook scheduled as a first step in the creation of the Logic App.
 
 Configure the Recurrence interval according to your preferences.
 
-![](recurrence.png)
+![](/assets/recurrence.png)
 
 Save your settings before we configure the next step in the Logic App.
 
-![](recurrencesettings.png)
+![](/assets/recurrencesettings.png)
 
 Step 4. Add Azure Automation Create Job Action.
 
 Click on Add Action to configure the next Action.
 
-![](Action.png)
+![](/assets/Action.png)
 
 Search for the Automation Connector and select the Create Job Action.
 
-![](AutomationAction.png)
+![](/assets/AutomationAction.png)
 
 Step 5. Configure the Create Job Settings.
 
 Enter the correct settings for the CreateJob Action and save the Logic App.
 
-![](Step5.png)
+![](/assets/Step5.png)
 
 Step 6. Test Logic App.
 
@@ -94,13 +94,13 @@ After the Configuration you can test the Logic App by selecting the Run option.
 
 If everything works ok you see the green check marks.
 
-![](Success.png)
+![](/assets/Success.png)
 
 Step 7. Check Runbook Job output
 
 The final check is verifying the Job Output.
 
-![](Runbook.png)
+![](/assets/Runbook.png)
 
 Hope you learned something new. Thanks <a href="https://twitter.com/MrTaoYang" target="_blank">Tao Yang</a> for sharing this to me!
 
