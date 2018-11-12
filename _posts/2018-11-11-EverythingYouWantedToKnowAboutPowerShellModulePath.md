@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Everything you wanted to know about PowerShell's Module Path.
-categories: [PowerShell]
-tags: [PowerShell]
+categories: [PowerShell, Scripts]
+tags: [PowerShell, Scripts]
 comments: true
 ---
 While working on some PowerShell scripts which are using AzureRM PowerShell modules for an Azure DevOps Extension I had some trouble using the correct AzureRM PowerShell module version on the Hosted Agent.
