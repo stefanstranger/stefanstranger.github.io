@@ -5,7 +5,6 @@ categories: [PowerShell]
 tags: [PowerShell]
 comments: true
 ---
-
 While working on some PowerShell scripts which are using AzureRM PowerShell modules for an Azure DevOps Extension I had some trouble using the correct AzureRM PowerShell module version on the Hosted Agent.
 
 By default version <a href="https://github.com/Microsoft/azure-pipelines-image-generation/blob/master/images/win/Vs2017-Server2016-Readme.md#azureazurerm-powershell-modules" target="_blank">2.1.0</a> of the PowerShell AzureRM version is being used on the Visual Studio 2017 on Windows Server 2016 (Hosted VS2017) Agent. But more AzureRM PowerShell versions are available, but not by default accessible via the PSModulePath environment variable.
