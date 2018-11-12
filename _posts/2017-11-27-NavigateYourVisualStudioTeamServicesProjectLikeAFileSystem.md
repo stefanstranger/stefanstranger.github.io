@@ -4,6 +4,7 @@ title: Navigate your Visual Studio Team Services projects like a file system
 abstract: Navigate your VSTS or TFS Projects like a file system using PowerShell VSTeam and SHiPS module.
 categories: [DevOps, Scripting, PowerShell, VSTS, Development]
 tags: [DevOps, Scripting, PowerShell, VSTS, Development]
+comments: true
 ---
 
 I've been using <a href="https://www.visualstudio.com/team-services/" target="_blank">Visual Studio Team Services</a> (VSTS) for almost all my development projects.

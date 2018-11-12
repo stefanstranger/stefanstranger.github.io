@@ -3,6 +3,7 @@ layout: post
 title: Testing Azure Resource Manager template functions
 categories: [Azure, PowerShell]
 tags: [Azure, PowerShell]
+comments: true
 ---
 In Azure Resource Manager (ARM) you can use **template functions** to help deploy resources in Azure.
 

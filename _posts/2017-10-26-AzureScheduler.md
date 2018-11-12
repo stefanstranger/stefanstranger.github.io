@@ -3,6 +3,7 @@ layout: post
 title: Azure Scheduler - Schedule your Runbooks more often than every hour
 categories: [Azure, Automation, Schedule]
 tags: [Azure, Automation, Schedule]
+comments: true
 ---
 Have you ever wanted to schedule your Azure Automation Runbook every 15 minutes?
 

@@ -1,14 +1,10 @@
 ---
+layout: post
 title: Connect to Azure SQL Database by obtaining a token from Azure Active Directory (AAD)
-abstract: Using Access Token for connecting to SQL Azure Server database
-keywords: Azure, SQL, Azure Active Directory, PowerShell
-categories: Azure, SQL, Azure Active Directory, PowerShell
-weblogName: TechNet Blog
-postId: 13565
-postDate: 2018-06-06T14:47:23.4674933+02:00
+tags: [Azure, SQL, Azure Active Directory, PowerShell]
+categories: [Azure, SQL, Azure Active Directory, PowerShell]
+comments: true
 ---
-# Connect to Azure SQL Database by obtaining a token from Azure Active Directory (AAD)
-
 **Scenario:**
 
 Use an Access Token from an Azure Service Principal to connect to an Azure SQL Database.
