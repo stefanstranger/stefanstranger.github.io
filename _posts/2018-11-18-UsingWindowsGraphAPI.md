@@ -6,7 +6,7 @@ tags: [PowerShell, Azure]
 comments: true
 ---
 
-In the blog post I'll explain how to use the 'old' Windows Graph API to set an Azure Service Principal as owner of another Service Principal.
+In this blog post I'll explain how to use the 'old' Windows Graph API to set an Azure Service Principal as owner of another Service Principal.
 
 For the automated configuration of Azure DevOps service connections for DevOps teams we use a "Parent" Service Principal which creates "Child" Service Principals which are being used to create a service connection for an Azure Subscription.
 
