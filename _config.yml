@@ -42,7 +42,7 @@ disqus_shortname: 'stefanstranger'
 
 # Jekyll configuration
 permalink: /:year/:month/:day/:title/
-# paginate: 8
+#paginate: 8
 
 # Build settings
 markdown: kramdown
@@ -50,8 +50,7 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-# - jekyll-paginate
-# - jemoji
+  - jemoji
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
