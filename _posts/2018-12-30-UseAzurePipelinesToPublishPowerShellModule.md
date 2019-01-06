@@ -118,9 +118,7 @@ steps:
   inputs:
     scriptFolder: '$(System.DefaultWorkingDirectory)\tests\*'
     additionalModulePath: '$(Build.ArtifactStagingDirectory)'
-    CodeCoverageFolder: '$(Build.ArtifactStagingDirectory)'
     resultsFile: '$(Common.TestResultsDirectory)\Test-$(Build.DefinitionName)_$(Build.BuildNumber).xml'
-    CodeCoverageOutputFile: '$(Common.TestResultsDirectory)\Coverage-$(Build.DefinitionName)_$(Build.BuildNumber).xml'
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
@@ -129,21 +127,10 @@ steps:
     testRunner: NUnit
     searchFolder: '$(Common.TestResultsDirectory)'
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage'
-  inputs:
-    summaryFileLocation: '$(Common.TestResultsDirectory)\Coverage-$(Build.DefinitionName)_$(Build.BuildNumber).xml'
-
 - powershell: Invoke-Build -Configuration 'Production' -Task Clean, CopyModuleFiles, PublishModule
   displayName: 'Publish PowerShell Module'
   env:
     psgallery: $(NugetAPIKey)
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: Module'
-  inputs:
-    ArtifactName: Module
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
 ```
 The following code defines the type of (Build) Agent where the build taks will be run on. In this case a Hosted VS2017 Agent.
 ```yaml
@@ -167,9 +154,7 @@ The nexts tasks will run the Pester Tests using <a href="https://marketplace.vis
   inputs:
     scriptFolder: '$(System.DefaultWorkingDirectory)\tests\*'
     additionalModulePath: '$(Build.ArtifactStagingDirectory)'
-    CodeCoverageFolder: '$(Build.ArtifactStagingDirectory)'
     resultsFile: '$(Common.TestResultsDirectory)\Test-$(Build.DefinitionName)_$(Build.BuildNumber).xml'
-    CodeCoverageOutputFile: '$(Common.TestResultsDirectory)\Coverage-$(Build.DefinitionName)_$(Build.BuildNumber).xml'
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
@@ -177,11 +162,6 @@ The nexts tasks will run the Pester Tests using <a href="https://marketplace.vis
   inputs:
     testRunner: NUnit
     searchFolder: '$(Common.TestResultsDirectory)'
-
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage'
-  inputs:
-    summaryFileLocation: '$(Common.TestResultsDirectory)\Coverage-$(Build.DefinitionName)_$(Build.BuildNumber).xml'
 ```
 
 With the last task the Invoke-Build script (PSJwt.build.ps1) is run on the Build Agent. The tasks Clean, CopyModuleFiles and PublishMode are executed. 
@@ -223,4 +203,3 @@ Hope this inspired you to use Azure DevOps YAML Pipelines to publish your PowerS
 * <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=vsts&tabs=schema" target="_blank">YAML schema reference</a>
 * <a href="https://marketplace.visualstudio.com/items?itemName=richardfennellBM.BM-VSTS-PesterRunner-Task" target="_blank">Pester Test Runner Build Task</a>
 * <a href="https://github.com/psake/psake" target="_blank">PSake PowerShell Module on Github</a>
-
