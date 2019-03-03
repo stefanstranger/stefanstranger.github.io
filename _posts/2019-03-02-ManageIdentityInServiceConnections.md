@@ -241,9 +241,12 @@ From the Azure Virtual Machine image create an Azure Virtual Machine by selectin
 ![](/assets/2019-02-07-04.png)
 
 **Remarks:**
-* When selecting a VM Size make sure you have enough RAM (1 GB RAM is not enough)
-* To be able to install the Azure DevOps Agent manually, enable RDP as Public inbound port.
-  Please be aware that this port will be exposed to the internet!
+
+| Remarks |
+|----------|
+| When selecting a VM Size make sure you have enough RAM (1 GB RAM is not enough) |
+| To be able to install the Azure DevOps Agent manually, enable RDP as Public inbound port. Please be aware that this port will be exposed to the inter |
+
 
 ![](/assets/2019-02-07-05.png)
 
@@ -291,9 +294,12 @@ Download the RDP file and connect with the useraccount and password you configur
 
 Install Azure AZ PowerShell modules on Self-Hosted Agent in Azure. We need these modules for the PowerShell Task script we want to run in the Azure DevOps Pipelines.
 
-**Remark:**
+| Remark |
+|----------|
+| At the moment of writing this blog article the <a href="https://github.com/Microsoft/azure-pipelines-tasks/issues/9201" target="_blank">Azure PowerShell Tasks didn't support PowerShell AZ Modules ye</a>t. So we need to authenticate against Azure within the PowerShell script used in the PowerShell task.|
 
-At the moment of writing this blog article the <a href="https://github.com/Microsoft/azure-pipelines-tasks/issues/9201" target="_blank">Azure PowerShell Tasks didn't support PowerShell AZ Modules ye</a>t. So we need to authenticate against Azure within the PowerShell script used in the PowerShell task.
+
+
 
 Run the following PowerShell command on the Self-Hosted Agent Azure Virtual Machine.
 
@@ -303,7 +309,7 @@ Install-Module -Name Az -Scope AllUsers
 
 We are going to use the Azure Az PowerShell modules within the PowerShell Tasks of the Azure DevOps Pipelines.
 
-### Step 4. Enable Managed Identity on Azure Virtual Machine
+### Step 3. Enable Managed Identity on Azure Virtual Machine
 Go to the Azure Portal and go the Windows Virtual Machine you deployed in step 2. and select Identity and change the status to on.
 
 ![](/assets/2019-02-07-11.png)
@@ -314,6 +320,13 @@ If you copy the Object ID you can the check the Principal Key Credentials with P
 Get-AzureADServicePrincipalKeyCredential -ObjectId "[Enter Object ID]" -OutVariable MICredential
 New-TimeSpan -Start $MICredential.StartDate -End $MICredential.EndDate | Select Days
 ```
+
+| Remark |
+|----------|
+| I didn't use the Get-AzADServicePrincipal from the Az.Resources PowerShell module because this returns less information than the Get-AzureADServicePrincipalKeyCredential.|
+
+
+
 
 ![](/assets/2019-02-07-12.png)
 
