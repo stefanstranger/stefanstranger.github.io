@@ -240,8 +240,6 @@ From the Azure Virtual Machine image create an Azure Virtual Machine by selectin
 
 ![](/assets/2019-02-07-04.png)
 
-**Remarks:**
-
 | Remarks |
 |----------|
 | When selecting a VM Size make sure you have enough RAM (1 GB RAM is not enough) |
