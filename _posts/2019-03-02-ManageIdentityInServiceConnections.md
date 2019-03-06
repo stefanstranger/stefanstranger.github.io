@@ -6,7 +6,7 @@ tags: [IaM, Azure, DevOps]
 comments: true
 ---
 
-I reciently noticed that there is a now an option to use **Managed Identity Authentication** for Azure DevOps Connection Services besides Service Principal Authentication.
+I recently noticed that there is a now an option to use **Managed Identity Authentication** for Azure DevOps Connection Services besides Service Principal Authentication.
 
 
 For those not familair with **<a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops" target="_blank">Azure DevOps Connection Services</a>**, you use them to connect to external and remote services to execute tasks for a build or deployment.
