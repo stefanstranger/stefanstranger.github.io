@@ -19,7 +19,8 @@
 
     <!-- Meta information for search engines -->
     <meta name="author" content="{{ owner.name }}">
-    <meta name="description" content="{% if page.summary %}{{ page.summary | xml_escape }}{% else %}{{ site.description | xml_escape }}{% endif %}">
+    <meta name="description"
+        content="{% if page.summary %}{{ page.summary | xml_escape }}{% else %}{{ site.description | xml_escape }}{% endif %}">
     {% if page.categories %}
     <meta name="keywords" content="{{ page.categories | join: ', ' }}">
     {% endif %}
@@ -30,14 +31,16 @@
     <meta name="twitter:creator" content="@{{ site.owner.twitter }}" />
     {% endif %}
     <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
-    <meta name="twitter:description" content="{% if page.summary %}{{ page.summary | strip_html }}{% elsif page.excerpt %}{{ page.excerpt  | strip_html }}{% else %}{{ site.description | strip_html }}{% endif %}" />
+    <meta name="twitter:description"
+        content="{% if page.summary %}{{ page.summary | strip_html }}{% elsif page.excerpt %}{{ page.excerpt  | strip_html }}{% else %}{{ site.description | strip_html }}{% endif %}" />
     <meta name="twitter:url" content="{{ site.url }}{{ page.url }}" />
 
     <!-- Open Graph -->
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
-    <meta property="og:description" content="{% if page.summary %}{{ page.summary | strip_html }}{% elsif page.excerpt %}{{ page.excerpt  | strip_html }}{% else %}{{ site.description | strip_html }}{% endif %}" />
+    <meta property="og:description"
+        content="{% if page.summary %}{{ page.summary | strip_html }}{% elsif page.excerpt %}{{ page.excerpt  | strip_html }}{% else %}{{ site.description | strip_html }}{% endif %}" />
     <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
     <meta property="og:site_name" content="{{ site.title | strip_html | xml_escape }}">
 
@@ -45,8 +48,8 @@
     <link rel="stylesheet" href="/css/trio.css">
 
     <!-- Social buttons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
     <!-- Set the canonical URL for search engines -->
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.url }}">
@@ -138,6 +141,9 @@
         <br />
     </footer>
     <!-- Footer: end -->
+
+    <!-- Google Analytics-->
+    {% include analytics.html %}
 
 </body>
 
