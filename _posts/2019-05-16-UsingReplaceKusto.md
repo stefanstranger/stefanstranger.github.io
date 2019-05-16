@@ -29,6 +29,4 @@ With above Kusto Query you can replace string values from your data set.
 
 ![Kusto Query](/assets/2019-05-16.png)
 
-
 Hope this was helpfull.
-
