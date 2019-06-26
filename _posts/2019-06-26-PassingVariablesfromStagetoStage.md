@@ -46,22 +46,22 @@ To update the Release Definition we are using the <a href="https://docs.microsof
 ## Release Permissions
 To allow for updating the Release Definition during the Release you need to configure the Release Permission **Manage releases** for the **Project Collection Build Service**.
 
-![](../assets/2019-06-26-01.png)
+![](/assets/2019-06-26-01.png)
 
 ## Allow scripts to access the OAuth token
 Because we are going to update the Release Definition and Release variable in the first Stage we need to enable the Allow scripts to access the OAuth token.
 
-![](../assets/2019-06-26-02.png)
+![](/assets/2019-06-26-02.png)
 
 # Example Release Pipeline
 
 Let's start with the creation of new Azure DevOps Release Pipeline and start with an Empty job.
 
-![](../assets/2019-06-26-03.png)
+![](/assets/2019-06-26-03.png)
 
 Next create an empty Pipeline variable for the Release scope.
 
-![](../assets/2019-06-26-04.png)
+![](/assets/2019-06-26-04.png)
 
 Configure Allow scripts to access the OAuth token on the Agent job in Stage 1.
 
@@ -75,7 +75,7 @@ Write-Output -InputObject ('Variable myVar in Task 1, Stage 1 is: {0}' -f $Rando
 
 Write-Output ('##vso[task.setvariable variable=myVar]{0}' -f $Random)
 ```
-![](../assets/2019-06-26-05.png)
+![](/assets/2019-06-26-05.png)
 
 Now it's time to update the Release Definition and Release Variable (StageVar). Again create an (inline) PowerShell task in Stage 1.
 
@@ -126,15 +126,15 @@ Write-Output ('Updated Release Pipeline variables output: {0}' -f $($Release.var
 Remark:
 Make sure you use "$(myVar)" to retrieve the script value! Replace myVar with your variable name.
 
-![](../assets/2019-06-26-06.png)
+![](/assets/2019-06-26-06.png)
 
 Create a new Stage 2 and verify if the myVar variable can be retrieved.
 
-![](../assets/2019-06-26-07.png)
+![](/assets/2019-06-26-07.png)
 
 Again we can use an (inline) PowerShell task to retrieve the value of myVar via the Release Variable StageVar.
 
-![](../assets/2019-06-26-08.png)
+![](/assets/2019-06-26-08.png)
 
 ```PowerShell
 Write-Output -InputObject ("myVar Variable in Task 1, Stage 2 is: {0}" -f "$(stageVar)")
@@ -143,10 +143,10 @@ Write-Output -InputObject ("myVar Variable in Task 1, Stage 2 is: {0}" -f "$(sta
 Result:
 
 Release variable set in Stage 1:
-![](../assets/2019-06-26-09.png)
+![](/assets/2019-06-26-09.png)
 
 Retrieving variable in Stage 2:
-![](../assets/2019-06-26-10.png)
+![](/assets/2019-06-26-10.png)
 
 Hope this will help you when passing Release Variable from one Stage to another Stage.
 
