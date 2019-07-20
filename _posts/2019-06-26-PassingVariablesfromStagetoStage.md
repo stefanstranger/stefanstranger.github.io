@@ -10,6 +10,10 @@ While working on an Azure DevOps Release Pipeline I wanted to pass a variable fr
 
 After some searches on the Internet I found that <a href="http://donovanbrown.com/post/Passing-variables-from-stage-to-stage-in-Azure-DevOps-release" target="_blank">Donovan Brown</a> also wrote a blog post on this topic but I was not able to get this working.
 
+**Update 07-30-2019:** 
+
+It turned out that it didn't work due to a permission issue. Check his original blog post for more information.
+
 # Variable Scopes
 
 Azure DevOps has various scopes where you can define your custom variables.
