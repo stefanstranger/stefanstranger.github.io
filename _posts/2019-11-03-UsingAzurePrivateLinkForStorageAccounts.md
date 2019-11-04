@@ -132,7 +132,14 @@ No forwarders configured. Root hints are used.
 | DNS Servers | Custom (10.2.16.4) | IP Address of DNS Server with Conditional Forwarders for privatelink.blob.core.net |
 | Peerings | Peer with pl-shared-vnet | Peered with the Vnet where the VMs and Private Endpoint is l
 
-<img src="/assets/27-10-2019-3-4.png" width="25"> Notes
+<table border="0" align="left" width="50">
+<thead>
+  <tr>
+	<th><img src="/assets/27-10-2019-3-4.png" width="25"></th>
+	<th>Notes</th>
+  </tr>
+</thead>
+</table>
 
 To enable access to the private endpoint for the Storage Account from on-premises servers a conditional forwarder needs to be configured on the on-premises DNS server for privatelink.blob.core.windows.net and azure.contoso.com to the DNS Server in Azure.
 
