@@ -37,7 +37,14 @@ To investigate the different scenario's for the use-cases of Private Endpoints I
 
 ![](/assets/27-10-2019-3.png)
 
-<img src="/assets/27-10-2019-3-1.png" width="25">Notes
+<table border="0" align="left" width="50">
+<thead>
+  <tr>
+	<th><img src="/assets/27-10-2019-3-1.png" width="25"></th>
+	<th>Notes</th>
+  </tr>
+</thead>
+</table>
 
 **Resources**
 
@@ -56,7 +63,14 @@ Shared Virtual Network (pl-shared-vnet) for both the Virtual Machine(s) and the 
 | Peerings | Peer with pl-dns-vnet | Peered with the Vnet where the DNS Server with Conditional  Forwarders is located |
 | Private endpoints | Name: pl-01-sa-blob-pep | |
 
-<img src="/assets/27-10-2019-3-2.png" width="25">Notes
+<table border="0" align="left" width="50">
+<thead>
+  <tr>
+	<th><img src="/assets/27-10-2019-3-2.png" width="25"></th>
+	<th>Notes</th>
+  </tr>
+</thead>
+</table>
 
 **Resources**
 
