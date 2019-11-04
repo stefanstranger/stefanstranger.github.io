@@ -85,7 +85,7 @@ This Private DNS zone is created to auto register A-record for Virtual Machines 
 |----------|----------|---|
 | Virtual Network Links | Shared VNet | Links to the Shared VNet where the Private Endpoint and (test) VM are located. Auto registration is enabled |
 
-<table border="0" align="left">
+<table border="0" align="left" width=50>
   <tr>
 	<th><img src="/assets/27-10-2019-3-3.png" width="25"></th>
 	<th>Notes</th>
