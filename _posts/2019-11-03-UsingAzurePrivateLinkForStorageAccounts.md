@@ -13,11 +13,12 @@ Azure Private Link provides a number of benefits (see below for more information
 
 | Important                                |
 |------------------------------------------|
-| This public preview is provided without a service level agreement and should not be used for production workloads. Certain features may not be supported, may have constrained capabilities, or may not be available in all Azure locations. <a href="https://azure.microsoft.com/support/legal/preview-supplemental-terms/" target="_blank">See the Supplemental Terms of Use for Microsoft Azure Previews</a> for details. For known limitations, see <a href="https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview#limitations" target="_blank">Private Endpoint</a> and <a href="https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#limitations" target="_blank">Private Link Service</a>.<br><br> |
+| This public preview is provided without a service level agreement and should not be used for production workloads. Certain features may not be supported, may have constrained capabilities, or may not be available in all Azure locations. <a href="https://azure.microsoft.com/support/legal/preview-supplemental-terms/" target="_blank">See the Supplemental Terms of Use for Microsoft Azure Previews</a> for details. For known limitations, see <a href="https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview#limitations" target="_blank">Private Endpoint</a> and <a href="https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#limitations" target="_blank">Private Link Service</a>.<br><br>
 
 Azure Private Link enables you to access Azure PaaS Services (for example, Azure Storage and SQL Database) and Azure hosted customer/partner services over a Private Endpoint in your virtual network. **Traffic between your virtual network and the service traverses over the Microsoft backbone network, eliminating exposure from the public Internet**. You can also create your own Private Link Service in your virtual network (VNet) and deliver it privately to your customers. The setup and consumption experience using Azure Private Link is consistent across Azure PaaS, customer-owned, and shared partner services.
 
 ## Key benefits (from <a href="https://docs.microsoft.com/en-us/azure/private-link/private-link-overview#key-benefits" target="_blank">Microsoft docs</a>)
+
 Azure Private Link provides the following benefits:
 
 * **Privately access services on the Azure platform:** Connect your virtual network to services running in Azure privately without needing a public IP address at the source or destination. Service providers can render their services privately in their own virtual network and consumers can access those services privately in their local virtual network. The Private Link platform will handle the connectivity between the consumer and services over the Azure backbone network.
@@ -36,7 +37,7 @@ To investigate the different scenario's for the use-cases of Private Endpoints I
 
 ![](/assets/27-10-2019-3.png)
 
-<img src="../assets/27-10-2019-3-1.png" width="25"> Notes
+<img src="/assets/27-10-2019-3-1.png" width="25"> Notes
 
 **Resources**
 
@@ -47,7 +48,6 @@ To investigate the different scenario's for the use-cases of Private Endpoints I
 
 Shared Virtual Network (pl-shared-vnet) for both the Virtual Machine(s) and the Private Endpoint for the Storage Account.
 
-
 | Property | Value | Comment |
 |----------|----------|---|
 | Address space | 10.2.0.0/27 |  |
@@ -56,7 +56,7 @@ Shared Virtual Network (pl-shared-vnet) for both the Virtual Machine(s) and the 
 | Peerings | Peer with pl-dns-vnet | Peered with the Vnet where the DNS Server with Conditional  Forwarders is located |
 | Private endpoints | Name: pl-01-sa-blob-pep | |
 
-<img src="../assets/27-10-2019-3-2.png" width="25"> Notes
+<img src="/assets/27-10-2019-3-2.png" width="25"> Notes
 
 **Resources**
 
@@ -71,24 +71,21 @@ Shared Virtual Network (pl-shared-vnet) for both the Virtual Machine(s) and the 
 
 ![](/assets/27-10-2019-4.png)
 
-
 A-record for Blob Storage Account Private Link screenshot.
 
 ![](/assets/27-10-2019-4.1.png)
 
 **azure.contoso.com Private DNS Zone**
 
-This Private DNS zone is created to auto register A-record for Virtual Machines for the azure.contoso.com Private DNS zone. Virtual Machines register to the Azure Private DNS Zone for name resolution across Virtual Networks. 
+This Private DNS zone is created to auto register A-record for Virtual Machines for the azure.contoso.com Private DNS zone. Virtual Machines register to the Azure Private DNS Zone for name resolution across Virtual Networks.
 
 ![](/assets/27-10-2019-4.2.png)
-
 
 | Property | Value | Comment |
 |----------|----------|---|
 | Virtual Network Links | Shared VNet | Links to the Shared VNet where the Private Endpoint and (test) VM are located. Auto registration is enabled |
 
-
-<img src="../assets/27-10-2019-3-3.png" width="25"> Notes
+<img src="/assets/27-10-2019-3-3.png" width="25"> Notes
 
 **Resources**
 
@@ -114,16 +111,16 @@ No forwarders configured. Root hints are used.
 | DNS Servers | Custom (10.2.16.4) | IP Address of DNS Server with Conditional Forwarders for privatelink.blob.core.net |
 | Peerings | Peer with pl-shared-vnet | Peered with the Vnet where the VMs and Private Endpoint is l
 
-<img src="../assets/27-10-2019-3-4.png" width="25"> Notes
+<img src="/assets/27-10-2019-3-4.png" width="25"> Notes
 
 To enable access to the private endpoint for the Storage Account from on-premises servers a conditional forwarder needs to be configured on the on-premises DNS server for privatelink.blob.core.windows.net and azure.contoso.com to the DNS Server in Azure.
-
 
 ## <a href="https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview#dns-configuration" target="_blank">DNS Configuration</a>
 
 When connecting to a private link resource using a fully qualified domain name (FQDN) as part of the connection string, it's important to correctly configure your DNS settings to resolve to the allocated private IP address
 
 The following options are available to configure the DNS settings for private endpoints:
+
 * Host file (only for testing)
 * Private DNS Zone
 * Custom DNS Server
@@ -185,7 +182,6 @@ From internet we should not have access to the blob storage account container if
 
 ![](/assets/27-10-2019-7.png)
 
-
 ## Lessons learned
 
 While investigating Azure Private Link I learned some lessons I would like to share.
@@ -202,11 +198,9 @@ Virtual Network (VNet) **service endpoints** extend your virtual network private
 
 At this time, conditional forwarding is not supported (could be needed for enabling DNS resolution between Azure and on-premises networks)
 
-
 ### Network Security Groups
 
 Network Security Groups (NSG) don't work on Private Endpoints will still work on Vnet Subnets. The rules will not be effective on traffic processed by the private endpoint. You must have network policies enforcement disabled to deploy private endpoints in a subnet. NSG is still enforced on other workloads hosted on the same subnet. Routes on any client subnet will be using an /32 prefix, changing the default routing behavior requires a similar UDR.
-
 
 **References:**
 * <a href="https://docs.microsoft.com/en-us/azure/private-link/private-link-overview" target="_blank">What is Azure Private Link? (Preview)</a>
