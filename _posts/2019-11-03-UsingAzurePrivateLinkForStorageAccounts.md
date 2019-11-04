@@ -37,7 +37,7 @@ To investigate the different scenario's for the use-cases of Private Endpoints I
 
 ![](/assets/27-10-2019-3.png)
 
-<img src="/assets/27-10-2019-3-1.png" width="25"> Notes
+<img src="/assets/27-10-2019-3-1.png" width="25">Notes
 
 **Resources**
 
@@ -56,7 +56,7 @@ Shared Virtual Network (pl-shared-vnet) for both the Virtual Machine(s) and the 
 | Peerings | Peer with pl-dns-vnet | Peered with the Vnet where the DNS Server with Conditional  Forwarders is located |
 | Private endpoints | Name: pl-01-sa-blob-pep | |
 
-<img src="/assets/27-10-2019-3-2.png" width="25"> Notes
+<img src="/assets/27-10-2019-3-2.png" width="25">Notes
 
 **Resources**
 
@@ -85,7 +85,7 @@ This Private DNS zone is created to auto register A-record for Virtual Machines 
 |----------|----------|---|
 | Virtual Network Links | Shared VNet | Links to the Shared VNet where the Private Endpoint and (test) VM are located. Auto registration is enabled |
 
-<img src="/assets/27-10-2019-3-3.png" width="25"> Notes
+<img src="/assets/27-10-2019-3-3.png" width="25">Notes
 
 **Resources**
 
