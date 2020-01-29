@@ -124,7 +124,7 @@ To be able to trigger a Github Action from a webhook you need to create a Person
 
 ![](/assets/2020-01-29_19-11-54.png)
 
-After storing the Github Personal Access Token for example as environment variable you can use this token in the web request.
+After storing the Github Personal Access Token as environment variable you can use this token in the web request.
 
 ```PowerShell
 <#
@@ -163,7 +163,7 @@ If you run above PowerShell script it should trigger the earlier configured  Git
 
 ## Run a PowerShell script stored in your Repository
 
-Instead of an inline PowerShell script we can also use a PowerShell script from our Repository if we want.
+Instead of an inline PowerShell script we can also use a PowerShell script from our Repository.
 
 Check the following [Hello-World.ps1](https://github.com/stefanstranger/githubactions/blob/master/Hello-World.ps1) example script.
 
