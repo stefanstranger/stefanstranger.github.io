@@ -87,9 +87,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run PowerShell Hello World script
+      if: github.event.action == 'inline'
       run: Write-Output 'Hello World!'
     - name: Run a multi-line PowerShell script
-      if: github.event.action == 'demo'
+      if: github.event.action == 'inline'
       run: |
         $psversiontable;
         Get-Process;
@@ -113,7 +114,7 @@ Result when above Github Action workflow is run:
 | uses        | This action (actions/checkout@v1) checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it. |
 | name        | Name of the step                                                                                                      |
 | run         | Run commands                                                                                                          | Run PowerShell cmdlet 'Write-Host'                                                                                                                                                                          |
-| if          | conditional to prevent a step from running unless a condition is met                                                  | the body of the web request to the Github action contains event_type=demo                                                                                                                                   |
+| if          | conditional to prevent a step from running unless a condition is met                                                  | the body of the web request to the Github action contains event_type=inline                                                                                                                                 |
 
 ## Trigger Github Action from webhook
 
@@ -140,7 +141,7 @@ $uri = ('https://api.github.com/repos/{0}/{1}/dispatches' -f $GithubUserName, $G
 
 #region web request call
 $Body = @{
-    'event_type' = 'demo' #used in the if condition of the Github Action
+    'event_type' = 'inline' #used in the if condition of the Github Action
 } | ConvertTo-Json
 
 
@@ -160,10 +161,40 @@ Invoke-RestMethod @params -verbose
 ```
 If you run above PowerShell script it should trigger the earlier configured  Github Action.
 
+## Run a PowerShell script stored in your Repository
 
+Instead of an inline PowerShell script we can also use a PowerShell script from our Repository if we want.
+
+Check the following [Hello-World.ps1](https://github.com/stefanstranger/githubactions/blob/master/Hello-World.ps1) example script.
+
+If we want to run this script from our Github Action we can create the following Github Action.
+
+```yaml
+name: Hello World script
+
+on: [repository_dispatch]
+
+jobs:
+  hello-world-script:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run PowerShell Hello World script
+      if: github.event.action == 'script'
+      run: pwsh -command ".\$GITHUB_WORKSPACE\Hello-World.ps1"
+```
+
+Result:
+
+![](/assets/2020-01-29_19-54-09.png)
+
+In my next blog post I want to investigate the Github Marketplace and explain how to develop and publish Github Actions.
 
 **References:**
 * [Github Actions documentation](https://github.com/features/actions)
 * [Help documentation Github Action](https://help.github.com/en/actions/automating-your-workflow-with-github-actions)
 * [A curated list of awesome things related to GitHub Actions](https://github.com/sdras/awesome-actions)
 * [Workflow syntax for GitHub Actions](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions)
+* [Github repo used for blog post](https://github.com/stefanstranger/githubactions)
