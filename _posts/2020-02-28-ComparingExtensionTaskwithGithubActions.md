@@ -38,7 +38,7 @@ If you want to learn more about how to develop an Azure DevOps Extension you can
 
 The Storage Account Extension with Azure Pipeline tasks is build with PowerShell scripts and an ARM Template.
 
-![Image of files for Storage Account Extension](../assets/06-02-2020-01.png)
+![Image of files for Storage Account Extension](/assets/06-02-2020-01.png)
 
 The Storage Account is deployed using the Create-StorageAccount.ps1 PowerShell script and the ARM StorageAccount.json file.
 
@@ -48,7 +48,7 @@ The rest of the artifacts are used to build and publish the Azure DevOps Extensi
 
 Within an Azure DevOps Release the following Extension Task parameters can be  configured as input:
 
-![Release task parameters](../assets/06-02-2020-02.png)
+![Release task parameters](/assets/06-02-2020-02.png)
 
 In a YAML pipeline it looks as follows:
 
@@ -101,7 +101,7 @@ Currently Github Actions supports the following options to [build Github Actions
 
 Skipping describing step 1 because you can easily find information online on how to [create a new repository](https://help.github.com/en/articles/creating-a-new-repository).
 
-![screenshot folder structure](../assets/23-02-2020-01.png)
+![screenshot folder structure](/assets/23-02-2020-01.png)
 
 **Step 2. Create a Dockerfile**
 
@@ -151,7 +151,7 @@ The [COPY instruction](https://docs.docker.com/engine/reference/builder/#copy) c
 
 We need this Docker file instruction to copy the ARM template and PowerShell script files to the container.
 
-![](../assets/23-02-2020-02.png)
+![](/assets/23-02-2020-02.png)
 
 
 | ENTRYPOINT ["pwsh","-File","/tmp/scripts/Main.ps1"] |
@@ -411,7 +411,7 @@ Get-AzADServicePrincipal -ServicePrincipalName $app.ApplicationId.Guid -OutVaria
 
 The Service Principal properties need to be configured as a [Github Action Secret with the name AZURE_CREDENTIALS (or any other name you want it to be) in the Github Repository](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md).
 
-![](../assets/23-02-2020-03.png)
+![](/assets/23-02-2020-03.png)
 
 The properties of the AZURE_CREDENTIALS Github Secret will be used in the final Github Workflow as an environment variable.
 
@@ -465,14 +465,14 @@ I tried to make some comparisons between Extension Tasks and Github Actions for 
 
 Keep in mind that I'm new to Github Actions so if I forgot to mention functionality please let me know in the comments of this blog post.
 
-| Functionality | Extension | Action | Comments  |
-|---------------|-----------|--------|-----------|
-| Extensibility | Customization are not limited to CI/CD tasks | Limited CI/CD tasks. | Azure DevOps offers at the moment more functionality then Github. But I've not looked into Github Enterprise yet |
-| Supported development languages | [Typescript and PowerShell](https://github.com/Microsoft/azure-pipelines-task-lib)* | [Javascript, TypeScript, Python, Java](https://help.github.com/en/actions/language-and-framework-guides) | Focussing on development of CI/CD tasks for both |
-| Marketplace | [Public and private Marketplace](https://marketplace.visualstudio.com/) | [Public Marketplace](https://github.com/marketplace) | For Azure DevOps you can choose to not have your extension publicly published and only shared with certain Azure DevOps Organizations. When a Github Action is in a private repository, the action can only be used in workflows in the same repository. Public actions can be used by workflows in any repository.  |
-| GUI support| Azure DevOps Extension tasks support both a GUI and can be used in classical and yaml pipelines | No support for a GUI interface |  |
-| Versioning | [Both the Extension and task can be versioned](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/tasks?view=azure-devops&tabs=yaml#task-versions) | [Support for versioning using a commit SHA, branch, or tag](https://help.github.com/en/actions/building-actions/about-actions#versioning-your-action) | [Azure DevOps tasks support automatic or manual updating of the pipeline](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/tasks?view=azure-devops&tabs=yaml#task-versions) |
-| Bundling of activities  | Extensions can bundle multiple tasks | Github Actions often seem to have one Action within the Github Repository |  |
+| Functionality                   | Extension                                                                                                                                                       | Action                                                                                                                                                | Comments                                                                                                                                                                                                                                                                                                            |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Extensibility                   | Customization are not limited to CI/CD tasks                                                                                                                    | Limited CI/CD tasks.                                                                                                                                  | Azure DevOps offers at the moment more functionality then Github. But I've not looked into Github Enterprise yet                                                                                                                                                                                                    |
+| Supported development languages | [Typescript and PowerShell](https://github.com/Microsoft/azure-pipelines-task-lib)*                                                                             | [Javascript, TypeScript, Python, Java](https://help.github.com/en/actions/language-and-framework-guides)                                              | Focussing on development of CI/CD tasks for both                                                                                                                                                                                                                                                                    |
+| Marketplace                     | [Public and private Marketplace](https://marketplace.visualstudio.com/)                                                                                         | [Public Marketplace](https://github.com/marketplace)                                                                                                  | For Azure DevOps you can choose to not have your extension publicly published and only shared with certain Azure DevOps Organizations. When a Github Action is in a private repository, the action can only be used in workflows in the same repository. Public actions can be used by workflows in any repository. |
+| GUI support                     | Azure DevOps Extension tasks support both a GUI and can be used in classical and yaml pipelines                                                                 | No support for a GUI interface                                                                                                                        |                                                                                                                                                                                                                                                                                                                     |
+| Versioning                      | [Both the Extension and task can be versioned](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/tasks?view=azure-devops&tabs=yaml#task-versions) | [Support for versioning using a commit SHA, branch, or tag](https://help.github.com/en/actions/building-actions/about-actions#versioning-your-action) | [Azure DevOps tasks support automatic or manual updating of the pipeline](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/tasks?view=azure-devops&tabs=yaml#task-versions)                                                                                                                          |
+| Bundling of activities          | Extensions can bundle multiple tasks                                                                                                                            | Github Actions often seem to have one Action within the Github Repository                                                                             |                                                                                                                                                                                                                                                                                                                     |
 
 
 # Conclusion
