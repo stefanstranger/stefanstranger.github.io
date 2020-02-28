@@ -510,3 +510,4 @@ All in all Github Actions offer similar functionality as Azure DevOps Extension 
 * [Creating a Docker container action](https://help.github.com/en/actions/building-actions/creating-a-docker-container-action)
 * [Building (Github Actions)](https://help.github.com/en/actions/building-actions)
 * [Set up Secrets in GitHub Action workflows](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md#set-up-secrets-in-github-action-workflows)
+* [Azure Storage Account Github Action repository](https://github.com/stefanstranger/azure-storageaccount-action)
