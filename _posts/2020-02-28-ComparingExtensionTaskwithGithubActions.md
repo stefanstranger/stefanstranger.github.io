@@ -121,14 +121,22 @@ ENTRYPOINT ["pwsh","-File","/tmp/scripts/Main.ps1"]
 
 Let's go through the Dockerfile step by step.
 
-|FROM mcr.microsoft.com/powershell:7.0.0-rc.3-alpine-3.8|
-|----------|
+<table>
+    <tr>
+		<th>FROM mcr.microsoft.com/powershell:7.0.0-rc.3-alpine-3.8</th>
+	</tr>
+</table>
+
+
 
 The [FROM instruction](https://docs.docker.com/engine/reference/builder/#from) initializes a new build stage and sets the Base Image for subsequent instructions.
 We need PowerShell (core) to run the PowerShell command to deploy and remove the Storage Account, so we will be using the currently latest available alpine version.
 
-| RUN pwsh -c "Install-Module Az.xxx -Acceptlicense -Force" |
-|----------|
+<table>
+    <tr>
+		<th>RUN pwsh -c "Install-Module Az.xxx -Acceptlicense -Force"</th>
+	</tr>
+</table>
 
 The Docker file needs to be able to run PowerShell scripts containing the following Azure PowerShell commands:
 
@@ -144,8 +152,11 @@ For above commands it's necessary to install the following Azure PowerShell modu
 * Az.Resources
 * Az.Storage
 
-| COPY ./src/ ./tmp/ |
-|----------|
+<table>
+    <tr>
+		<th>COPY ./src/ ./tmp/</th>
+	</tr>
+</table>
 
 The [COPY instruction](https://docs.docker.com/engine/reference/builder/#copy) copies new files or directories from <src> and adds them to the filesystem of the container at the path
 
@@ -153,9 +164,11 @@ We need this Docker file instruction to copy the ARM template and PowerShell scr
 
 ![](/assets/23-02-2020-02.png)
 
-
-| ENTRYPOINT ["pwsh","-File","/tmp/scripts/Main.ps1"] |
-|----------|
+<table>
+    <tr>
+		<th>ENTRYPOINT ["pwsh","-File","/tmp/scripts/Main.ps1"]</th>
+	</tr>
+</table>
 
 An [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint) allows you to configure a container that will run as an executable.
 
@@ -212,15 +225,21 @@ runs:
     - ${{inputs.AccessTier}}
 ```
 
-| inputs |
-|----------|
+<table>
+    <tr>
+		<th>inputs</th>
+	</tr>
+</table>
 
 With the inputs statement in the action.yml meta datafile we offer the users of the Github Action to input the required parameter values for the Main.ps1 script.
 
 I choose to incorporate both the deployment and removal of a Storage Account in one Github Action, so some of the inputs are required while others a action specific. 
 
-| args |
-|----------|
+<table>
+    <tr>
+		<th>args</th>
+	</tr>
+</table>
 
 To allow the Main.ps1 script to consume the input from the Docker Container I had to use arguments. 
 
@@ -448,10 +467,12 @@ From your terminal, commit your all the files.
 
 It's best practice to also add a version tag for releases of your action. For more information on versioning your action, see "[About actions.](https://help.github.com/en/actions/building-actions/about-actions#versioning-your-action)"
 
+```bash
 git add action.yml Dockerfile README.md
 git commit -m "My first action is ready"
 git tag -a -m "My first Storage Account action release" v1
 git push --follow-tags
+```
 
 **Step 6. Testing action in workflow**
 
