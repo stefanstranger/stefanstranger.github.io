@@ -23,7 +23,7 @@ Install-Module -Name PSDocs -Scope CurrentUser
 
 ### Getting started
 
-To create a Markdown content object stored running process in a Markdown table you can use the following example.
+To create a Markdown content object stored running processes in a Markdown table you can use the following example.
 
 ```PowerShell
 #region Create WIKI MarkDown Content
@@ -56,7 +56,7 @@ In Markdown this will look like this.
 ![MarkDown result](/assets/2020-04-12_12-49-21.png)
 
 
-Now we know how to create a Markdown document we need to learn to who create an Azure DevOps Wiki page. 
+Now we know how to create a Markdown document we need to learn how to create an Azure DevOps Wiki page. 
 
 ## Azure DevOps REST API - Pages
 
