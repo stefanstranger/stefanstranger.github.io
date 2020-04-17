@@ -106,4 +106,8 @@ Add the Github Token [a secret](https://aka.ms/create-secrets-for-GitHub-workflo
 
 ![Github Token Secret screenshot](/assets/GithubTokenSecret.png)
 
-Hope you enjoy this new Github Action!
+Hope you enjoy this new Github Action!  
+
+**References**
+
+- [Github Repository](https://github.com/stefanstranger/azuredevops-bug-action)
