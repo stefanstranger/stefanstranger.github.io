@@ -111,3 +111,5 @@ Hope you enjoy this new Github Action!
 **References**
 
 - [Github Repository](https://github.com/stefanstranger/azuredevops-bug-action)
+
+- [Action in Github MarktPlace](https://github.com/marketplace/actions/github-action-to-create-an-azure-devops-bug-workitem-when-a-workflow-fails)
