@@ -640,15 +640,14 @@ trigger:
 # Set variables
 variables:
   ResourceGroupName: "logicapp-demo-rg"
-  azureSubscription: "CSS-WE-stefstr (856789bf-8b10-4497-9f60-836d1989850e)"
+  azureSubscription: "[enter Azure Subscription Service Connection Name]"
   location: "West Europe"
   vmImageName: "windows-latest"
 
 stages:
   - stage: deploy
     displayName: Deploy stage
-    jobs:
-      - job: deploy
+    
         displayName: deploy
         pool:
           vmImage: $(vmImageName)
