@@ -172,7 +172,7 @@ Invoke-RestMethod @params
 #endregion
 ```
 
-In the <a href="https://stefanstranger.github.io/2020/04/25/CreatingAzureDevOpsWIKIPagesFromWithApipelinePart2/#scenario" target="_blank">next part of this blog post series</a> I want to share how you can use above knowledge to create a wiki from within an Azure DevOps Pipeline.
+In the <a href="https://stefanstranger.github.io/2020/04/25/CreatingAzureDevOpsWIKIPagesFromWithApipelinePart2" target="_blank">next part of this blog post series</a> I want to share how you can use above knowledge to create a wiki from within an Azure DevOps Pipeline.
 
 Hope you enjoyed this blog post.
 
@@ -184,4 +184,4 @@ Hope you enjoyed this blog post.
 
 - [Azure DevOps REST API for Pages](https://docs.microsoft.com/en-US/rest/api/azure/devops/wiki/pages?view=azure-devops-rest-5.0)
 
-- [Creating Azure DevOps WIKI Pages from within a pipeline - part 2](https://stefanstranger.github.io/2020/04/25/CreatingAzureDevOpsWIKIPagesFromWithApipelinePart2/#scenario)
+- [Creating Azure DevOps WIKI Pages from within a pipeline - part 2](https://stefanstranger.github.io/2020/04/25/CreatingAzureDevOpsWIKIPagesFromWithApipelinePart2)
