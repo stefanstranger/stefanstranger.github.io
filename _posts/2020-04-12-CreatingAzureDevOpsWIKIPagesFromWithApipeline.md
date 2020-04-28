@@ -6,22 +6,30 @@ tags: [CI/CD, WIKI, Markdown]
 comments: true
 ---
 
+**Contents**
+- [PSDocs](#psdocs)
+  - [Installation of PSDocs](#installation-of-psdocs)
+- [Getting started](#getting-started)
+- [Azure DevOps REST API - Pages](#azure-devops-rest-api---pages)
+  - [Wiki Identifier](#wiki-identifier)
+  - [PowerShell script to create an Azure DevOps Wiki page](#powershell-script-to-create-an-azure-devops-wiki-page)
+
 For a project I was investigating how I could dynamically create Markdown files. I searched the internet and I found the following PowerShell Module from <a href="https://www.linkedin.com/in/bernie-white" target="_blank">Bernie White</a> a Premier Field Engineer from Microsoft.
 
-## PSDocs
+# PSDocs
 
 PSDocs is a PowerShell module with commands to generate markdown from objects using PowerShell syntax.
 
 According to it's disclaimer the project is a **proof-of-concept** but for me it worked great and in these blog post series I'll explain how you can use this in your Azure DevOps Pipelines to create Markdown Wiki documentation. In part one I start with the basics.
 
-### Installation of PSDocs
+## Installation of PSDocs
 To install the PSDocs PowerShell module run:
 
 ```PowerShell
 Install-Module -Name PSDocs -Scope CurrentUser
 ```
 
-### Getting started
+# Getting started
 
 To create a Markdown content object stored running processes in a Markdown table you can use the following example.
 
@@ -58,7 +66,7 @@ In Markdown this will look like this.
 
 Now we know how to create a Markdown document we need to learn how to create an Azure DevOps Wiki page. 
 
-## Azure DevOps REST API - Pages
+# Azure DevOps REST API - Pages
 
 According to the [documentation](https://docs.microsoft.com/en-US/rest/api/azure/devops/wiki/pages?view=azure-devops-rest-5.0) Wiki pages are Markdown files that are stored in a Git repository in the backend.
 
@@ -68,7 +76,7 @@ The following web requests creates or edits a wiki page.
 PUT https://dev.azure.com/{organization}/{project}/_apis/wiki/wikis/{wikiIdentifier}/pages?path={path}&api-version=5.0
 ```
 
-### Wiki Identifier
+## Wiki Identifier
 
 One of the needed properties to create the wiki page is the wikiIdentifier. This is the Wiki id or name of the wiki.
 
@@ -76,7 +84,7 @@ We can find the wiki name by going to the Azure DevOps Project and selecting Wik
 
 ![Name of wiki](/assets/2020-04-12_14-26-38.png)
 
-### PowerShell script to create an Azure DevOps Wiki page
+## PowerShell script to create an Azure DevOps Wiki page
 
 With the following script you can create a Wiki page in Azure DevOps using the PSDocs PowerShell module and the Azure DevOps REST API.
 
@@ -164,7 +172,7 @@ Invoke-RestMethod @params
 #endregion
 ```
 
-In the next part of this blog post I want to share how you can use above knowledge to create a wiki from within an Azure DevOps Pipeline.
+In the <a href="https://stefanstranger.github.io/2020/04/25/CreatingAzureDevOpsWIKIPagesFromWithApipelinePart2/#scenario" target="_blank">next part of this blog post series</a> I want to share how you can use above knowledge to create a wiki from within an Azure DevOps Pipeline.
 
 Hope you enjoyed this blog post.
 
@@ -175,3 +183,5 @@ Hope you enjoyed this blog post.
 - [Azure DevOps REST API documentation for Wiki pages](https://docs.microsoft.com/en-US/rest/api/azure/devops/wiki/pages?view=azure-devops-rest-5.)
 
 - [Azure DevOps REST API for Pages](https://docs.microsoft.com/en-US/rest/api/azure/devops/wiki/pages?view=azure-devops-rest-5.0)
+
+- [Creating Azure DevOps WIKI Pages from within a pipeline - part 2](https://stefanstranger.github.io/2020/04/25/CreatingAzureDevOpsWIKIPagesFromWithApipelinePart2/#scenario)
