@@ -590,7 +590,7 @@ Hope you learned something new with this blog post.
 
 
 **References:**
-* <a href="https://stefanstranger.github.io/powershell/2018/10/02/RunningUniversalDashboardinALinuxDockerContainer.html" target="_blank">Blog post - Running Universal Dashboard in a Linux Docker Container</a>
+* <a href="https://stefanstranger.github.io/2018/10/02/RunningUniversalDashboardinALinuxDockerContainer/" target="_blank">Blog post - Running Universal Dashboard in a Linux Docker Container</a>
 * <a href="https://docs.microsoft.com/en-us/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview" target="_blank">Azure App Service Plan</a>
 * <a href="https://azure.microsoft.com/en-us/services/container-registry/" target="_blank">Azure Container Registry</a>
 * <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/?view=vsts" target="_blank">Azure DevOps Pipelines</a>
