@@ -6,9 +6,9 @@ tags: [CI/CD, Azure]
 comments: true
 ---
 
-**Contents**
 # Table of contents
 
+- [Table of contents](#table-of-contents)
 - [Azure Logic Apps](#azure-logic-apps)
   - [Trigger](#trigger)
   - [Azure DevOps Service Hook](#azure-devops-service-hook)
@@ -712,46 +712,3 @@ Here is the complete Code for the Logic App.
     }
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
