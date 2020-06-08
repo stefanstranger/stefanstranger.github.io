@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Azur Logic Apps - Schedule your Runbooks more often than every hour
+title: Azure Logic Apps - Schedule your Runbooks more often than every hour
 categories: [Azure, Automation, Runbook, Logic App, PowerShell]
 tags: [Azure, Automation, Runbook, Logic App, PowerShell]
 comments: true
