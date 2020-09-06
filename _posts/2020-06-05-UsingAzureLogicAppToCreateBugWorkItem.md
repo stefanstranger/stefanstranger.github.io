@@ -185,7 +185,7 @@ Use the following Dynamic content. We want to use the DefaultIteration path from
 "@body('Send_an_HTTP_request_to_Azure_DevOps_-_Get_Iteration')['DefaultIteration']['path']"
 ```
 
-Got to the Designer add temp value and save Action before going to View Code.
+Go to the Designer add temp value and save Action before going to View Code.
 
 ![Screenshot of the Designer](/assets/2020-06-05-25.png)
 
@@ -270,7 +270,7 @@ If you get an unauthorized error message on the Send an HTTP request to Azure De
 
 ![Screenshot of Unauthorized Error in Logic App](/assets/2020-06-05-33.png)
 
-Got to API Connections and Delete the Azure DevOps Connection.
+Go to API Connections and Delete the Azure DevOps Connection.
 
 ![Screenshot of API Connection setting in Azure Portal](/assets/2020-06-05-34.png)
 
