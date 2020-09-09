@@ -56,6 +56,10 @@ Enjoy my "study notes" while becoming an Enterprise-Scale SME.
 
 If you also are interested to learn more about Enterprise-Scale please start reading the documentation shared in the Reference section below.
 
+**Update 09-09-2020**:
+
+[New blog post Enterpris-Scale Policy Driven Governance published](https://stefanstranger.github.io/2020/08/28/EnterpriseScalePolicyDrivenGovernance/)
+
 
 ## References
 
