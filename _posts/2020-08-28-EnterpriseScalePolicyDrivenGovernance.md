@@ -8,6 +8,8 @@ comments: true
 
 In this second blog post in the blog series about becoming an Enterprise-Scale Subject Matter Expert I want to share what I did to better understand the Enterprise-Scale design principle <u>Policy Driven Governance</u>.
 
+For those who have not read my initial blog post on becoming an Enterprise-Scale Subject Matter Expert please start [here](https://stefanstranger.github.io/2020/08/28/BecomingAnEnterpriseScaleSME/) first.
+
 - [Documentation](#documentation)
 - [What does policy-driven governance mean?](#what-does-policy-driven-governance-mean)
   - [Azure Policy in the context of Enterprise-Scale](#azure-policy-in-the-context-of-enterprise-scale)
