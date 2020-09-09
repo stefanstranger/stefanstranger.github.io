@@ -106,13 +106,13 @@ During the deployment I encountered some issues which were solved by below solut
 
 Overview of Wingtip Azure Portal deployment configuration.
 
-![Azure Portal deployment overview](/assets//WingtipDeploymentOverview.png)
+![Azure Portal deployment overview](/assets/WingtipDeploymentOverview.png)
 
 The reference implementations and the templates, are designed and optimized for Azure Portal deployment (Deploy to Azure). The current ARM templates being used for the Enterprise-Scale reference bootstrapped implementation heavily rely on Azure Portal Deployment and it’s deployment is a onetime activity. Once the platform resources are deployed, management of the Enterprise-Scale Landing Zone resources will happen via Infrastructure-as-code and changes are deployed in a controlled manner using a CI/CD pipeline in Azure DevOps or Github.
 
 Overview of the bootstrapped Enterprise-Scale reference implementation using CloudSkew [12].
 
-![Wingtip Azure Architecture overview](/assets//Enterprise-ScaleArchitecture.png)
+![Wingtip Azure Architecture overview](/assets/EnterpriseScaleArchitecture.png)
 
 ## Deploy Reference implementation
 
@@ -122,9 +122,9 @@ For more information about what is being deployed please look at the Wingtip ref
 
 The reference implementation deployments are run using the Deploy to Azure Portal Deployment. 
 
-![Wingtip customized deployment](/assets//WingtipCustomDeployment.png)
+![Wingtip customized deployment](/assets/WingtipCustomDeployment.png)
 
-![](/assets//CustomDeploymentscreen.png)
+![](/assets/CustomDeploymentscreen.png)
 
 When the Deploy to Azure button is selected a <u>Custom Deployment Blade</u> is triggered which calls the <a href="https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/wingtip/armTemplates/es-foundation.json" target="_blank">es-foundation.json</a> ARM Template with a custom Azure Portal UI defined by the <a href="https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/wingtip/armTemplates/portal-es-foundation.json" target="_blank">portal-es-foundation.json</a> [26]
 
@@ -169,7 +169,7 @@ When the Deploy to Azure button is selected a <u>Custom Deployment Blade</u> is 
 
 Based on the configuration made in the Custom Deployment Blade, resource deployments are triggered stored in the auxilery folder of the Enterprise-Scale Github repository.
 
-<img src="/assets//AuxiliaryFolder.png" alt="AuxileryFolderw" width="733" height="447"/>
+<img src="/assets/AuxiliaryFolder.png" alt="AuxileryFolderw" width="733" height="447"/>
 
 
 # AzGovViz - Azure Governance Visualizer
@@ -180,7 +180,7 @@ After the deployment of the above Azure infrastructure I wanted to see the confi
 
 Julian Hayward created an Azure Governance Visualizer called AzGovViz that shows exactly what I was looking for. [20]
 
-![](/assets//AzGovViz.png)
+![](/assets/AzGovViz.png)
 
 # Getting started with infrastructure-as-code
 
@@ -204,7 +204,7 @@ After reading the LinkedIn post from Anders Bonde called PlatformOps in a Micros
 The AzOps GitHub Action is rooted in the principle that **Everything in Azure** is a resource and to operate at-scale, it should be managed **declaratively to determine target goal state** of the overall platform. [14]
 
 With AzOps you are able to document compliance in code. But it offers more:
-![](/assets//AzOps-implementation-scope.png)
+![](/assets/AzOps-implementation-scope.png)
 
 ### Discovery
 Before starting the Enterprise-Scale journey, it is important for customers to discover existing configuration in Azure that can serve as platform baseline. Consequence of not discovering existing environment will be no reference point to rollback or roll-forward after deployment. Discovery is also important for organizations, who are starting their DevOps and Infrastructure-as-code (IaC) journey, as this can provide crucial on-ramp path to allow transitioning without starting all-over. [14]
@@ -462,13 +462,13 @@ Remark:
 
 Create branch, make changes, commit and push, create PR, approve and merge PR. After the AzOps Push Github Workflow the Policy Assignment was executed.
 
-![Policy Assignment in Azure Portal](/assets//PolicyAssignment.png)
+![Policy Assignment in Azure Portal](/assets/PolicyAssignment.png)
 
 ##### Create policyAssignment into the management group file 
 
 First we need to remove the enforce-resource-naming Policy assignment, before trying out the second option to assign a Policy. I used the Azure Portal to remove this Policy Assignment.
 
-![Delete Policy Assignment](/assets//deleteAssignment.png)
+![Delete Policy Assignment](/assets/deleteAssignment.png)
 
 After the deletion of the Policy Assignment I manually triggered the AzOps-Pull Workflow to retrieve the latest compliance-as-code Azure environment state. The initial Microsoft.Authorization_policyAssignments-Enforce-Naming-Convention.parameters.json file should be removed from your Github repository.
 
@@ -515,7 +515,7 @@ We now need to add below code to the Microsoft.Management_managementGroups-ES.pa
 
 Create branch, make changes, commit and push, create PR, approve and merge PR. After the AzOps Push Github Workflow the Policy Assignment was executed.
 
-![Screenshot of Azure Policy Assignment using managementgroup.parameters.json](/assets//PolicyAssignment-option2.png)
+![Screenshot of Azure Policy Assignment using managementgroup.parameters.json](/assets/PolicyAssignment-option2.png)
 
 When the AzOps-Pull Github Workflow is run you see that the Microsoft.Management_managementGroups-ES.parameters.json file in the main branch now contains above Policy Assignment code and that a new Microsoft.Authorization_policyAssignments-Enf-Naming-Convention.parameters.json file is created with the following content:
 
@@ -559,11 +559,11 @@ Suppose I want to remove the both the Policy Assignment and Policy Definition (e
 I removed the Policy Assignment info in the Microsoft.Management_managementGroups-ES.parameters.json and also removed the Microsoft.Authorization_policyAssignments-Enf-Naming-Convention.parameters.json file. And again followed the steps: create branch, make changes, commit and pushe, create PR, approve and merge PR in main branch.
 
 
-![screenshot removed assignment files](/assets//remove-assignment-files.png)
+![screenshot removed assignment files](/assets/remove-assignment-files.png)
 
 After the AzOps-Push workflow finized I was still able to see the Policy Assignment.
 
-![](/assets//PolicyAssignment-still-present.png)
+![](/assets/PolicyAssignment-still-present.png)
 
 Let's see what happens when I manually trigger the AzOps-Pull Github Workflow. It turns out that the Microsoft.Authorization_policyAssignments-Enf-Naming-Convention.parameters.json is recreated. That is to be expected because the Azure Policy Assignment was still present.
 
@@ -625,7 +625,7 @@ New-AzManagementGroupDeployment @parameters
 
 ```
 
-![Screenshot tenant.json template deployment](/assets//New-AzManagementGroupDeployment-using-tenant-json.png)
+![Screenshot tenant.json template deployment](/assets/New-AzManagementGroupDeployment-using-tenant-json.png)
 
 ### Does AzOps support Azure DevOps?
 
@@ -655,13 +655,13 @@ $AZURE_CREDENTIALS = @'
 ```
 Copy and paste the output to newly created AZURE_CREDENTIALS variable.
 
-<img src="/assets//ADOVariableSecret.png" alt="Azure DevOps AZURE_CREDENTIALS variable" width="309" height="581"/>
+<img src="/assets/ADOVariableSecret.png" alt="Azure DevOps AZURE_CREDENTIALS variable" width="309" height="581"/>
 
 ### How does AzOps Github Action works?
 
 The AzOps Github Action uses a Docker image [17]
 
-<img src="/assets//GithubAction.png" alt="Github Workflow" width="378" height="462"/>
+<img src="/assets/GithubAction.png" alt="Github Workflow" width="378" height="462"/>
 
 The <a href="https://github.com/Azure/AzOps/blob/main/entrypoint.ps1" target="_blank">entrypoint</a> PowerShell script being used by the Docker container contains some information which can be used to further investigate how this Github Action works.
 
@@ -669,7 +669,7 @@ Example:
 
 By enabling the Environment variables VERBOSE and DEBUG in the Github Pull Workflow we already can see more information.
 
-<img src="/assets//azops-pull-change.png" alt="Github Pull Workflow" width="460" height="422"/>
+<img src="/assets/azops-pull-change.png" alt="Github Pull Workflow" width="460" height="422"/>
 
 To better understand AzOps a good start is to clone the Github AzOps Repository. [14]
 
@@ -691,7 +691,7 @@ Initialize-AzOpsRepository -Verbose -SkipResourceGroup -Force
 
 This results into the creation of azops-folder in my local repo with all azure resources reflected. We now have compliance-as-code by having a local representation of the existing Azure environment as is.
 
-<img src="/assets//Initialize-AzOpsRepository.png" alt="Initialize AzOps Repository" width="475" height="405"/>
+<img src="/assets/Initialize-AzOpsRepository.png" alt="Initialize AzOps Repository" width="475" height="405"/>
 
 Remark:
 * I don't think running the AzOps module functions outside the Github Action is supported.
@@ -898,7 +898,7 @@ Within the ManagementGroups.parameter.json file there is a Policy Initiative cal
 
 Because the Azure builtin Policy Deploy Diagnostic Settings for Key Vault to Log Analytics workspace already was part of an Enterprise-Scale reference architecture implementation, we can now test what happens if we deploy a Key Vault without the setting to stream the diagnostic settings to a central Log Analytics workspace
 
-![](/assets//PolicyInitiative.png)
+![](/assets/PolicyInitiative.png)
 
 Use the following PowerShell code to deploy a Key Vault:
 
@@ -912,13 +912,13 @@ New-AzResourceGroup -Name 'es-demo-rg' -Location 'WestEurope'
 New-AzKeyVault -Name 'es-demo-kv' -ResourceGroupName 'es-demo-rg' -Location 'WestEurope'
 ```
 
-![Screenshot of PowerShell Key Vault Deployment](/assets//PowerShell-KeyVault-Deployment.png)
+![Screenshot of PowerShell Key Vault Deployment](/assets/PowerShell-KeyVault-Deployment.png)
 
-![Screenshot Key Vault Diagnostic Settings](/assets//KV-Diagnostic-Settings.png)
+![Screenshot Key Vault Diagnostic Settings](/assets/KV-Diagnostic-Settings.png)
 
 Let's wait until the Azure Policy remediation actions kicks-in.
 
-![](/assets//KV-Diagnostic-Setting-via-Policy.png)
+![](/assets/KV-Diagnostic-Setting-via-Policy.png)
 
 Please use the comments available below this blog post to share you insights regarding this Policy Driven Governance principle of Enterprise-Scale.
 
