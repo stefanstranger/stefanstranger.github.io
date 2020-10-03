@@ -35,7 +35,7 @@ Please look at the simple Hello World script stored as <a href="https://gist.git
 ```dockerfile
 FROM mcr.microsoft.com/powershell:6.1.0-rc.1-ubuntu-18.04
 RUN pwsh -c "Install-Module universaldashboard -Acceptlicense -Force"
-RUN pwsh -c "Invoke-WebRequest -Uri 'https://gist.githubusercontent.com/stefanstranger/cb74f5d78d7f4111c6c66915bc89a35f/raw/21a0305027495dd92d5b24e86370a3a5e5d8cdb0/HelloWorldUD-Example.ps1' -Method Get -OutFile /tmp/helloworldud-example.ps1"
+RUN pwsh -c "Invoke-WebRequest -Uri 'https://gist.githubusercontent.com/stefanstranger/cb74f5d78d7f4111c6c66915bc89a35f/raw/9a1ec9330a299593ef3d89925e0f88fc5c222641/HelloWorldUD-Example.ps1' -Method Get -OutFile /tmp/helloworldud-example.ps1"
 
 CMD [ "pwsh","-command","& ./tmp/helloworldud-example.ps1" ]
 ```
