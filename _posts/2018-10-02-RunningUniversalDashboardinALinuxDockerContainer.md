@@ -18,10 +18,10 @@ In my opinion a good example for my custom Docker image is a simple Hello World 
 ## Universal Dashboard
 Universal Dashboard is a cross-platform PowerShell module for developing and hosting web-based interactive dashboards.
 
-To create a Linux Docker container image with a Universal Dashboard I used the Ubuntu 18.04 PowerShell Core Docker image as a base for my dockerfile and added the Universal Dashboard Module and <a href="https://gist.github.com/stefanstranger/45d8129758eb44b44683c14dba2b8c45" target="_blank">Universal Dashboard Hello World PowerShell script</a>.
+To create a Linux Docker container image with a Universal Dashboard I used the Ubuntu 18.04 PowerShell Core Docker image as a base for my dockerfile and added the Universal Dashboard Module and <a href="https://gist.github.com/stefanstranger/cb74f5d78d7f4111c6c66915bc89a35f" target="_blank">Universal Dashboard Hello World PowerShell script</a>.
 
 ## High-Level steps:
-1. Create a <a href="https://gist.github.com/stefanstranger/45d8129758eb44b44683c14dba2b8c45" target="_blank">Universal Dashboard Hello World script</a>.
+1. Create a <a href="https://gist.github.com/stefanstranger/cb74f5d78d7f4111c6c66915bc89a35f" target="_blank">Universal Dashboard Hello World script</a>.
 2. Create a dockerfile to create the custom Docker image.
 3. Create Docker image from dockerfile.
 4. Start Docker container.
@@ -29,13 +29,13 @@ To create a Linux Docker container image with a Universal Dashboard I used the U
 
 **Step 1. Create Universal Dashboard script.**
 
-Please look at the simple Hello World script stored as <a href="https://gist.github.com/stefanstranger/45d8129758eb44b44683c14dba2b8c45" target="_blank">Gist</a>.
+Please look at the simple Hello World script stored as <a href="https://gist.github.com/stefanstranger/cb74f5d78d7f4111c6c66915bc89a35f" target="_blank">Gist</a>.
 
 **Step 2: Create a dockerfile.**
 ```dockerfile
 FROM mcr.microsoft.com/powershell:6.1.0-rc.1-ubuntu-18.04
-RUN pwsh -c "Install-Module universaldashboard -Acceptlicense -Force"
-RUN pwsh -c "Invoke-WebRequest -Uri 'https://gist.githubusercontent.com/stefanstranger/45d8129758eb44b44683c14dba2b8c45/raw/875f69a6f988b8d9632a63c155b9658b4d335fe1/HelloWorldUD-Example.ps1' -Method Get -OutFile /tmp/helloworldud-example.ps1"
+RUN pwsh -c "Install-Module UniversalDashboard.Community -Acceptlicense -Force"
+RUN pwsh -c "Invoke-WebRequest -Uri 'https://gist.githubusercontent.com/stefanstranger/cb74f5d78d7f4111c6c66915bc89a35f/raw/9a1ec9330a299593ef3d89925e0f88fc5c222641/HelloWorldUD-Example.ps1' -Method Get -OutFile /tmp/helloworldud-example.ps1"
 
 CMD [ "pwsh","-command","& ./tmp/helloworldud-example.ps1" ]
 ```
