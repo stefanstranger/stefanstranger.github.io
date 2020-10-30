@@ -4,3 +4,4 @@ _site
 Gemfile.lock
 *.bak
 Gemfile.lock
+*.code-workspace
