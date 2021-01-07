@@ -51,7 +51,7 @@ The function "timertrigger" was created successfully from the "timertrigger" tem
 
 # Start Azure Function locally
 
-If we now try to run the just created Azure Function locally using func start --verbose we get the following error message.
+If we now try to run the just created Azure Function locally using func start \--verbose we get the following error message.
 
 ![Starting Azure Function](/assets/06-01-2021-01.png)
 
