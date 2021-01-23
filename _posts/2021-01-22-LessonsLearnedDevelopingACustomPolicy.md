@@ -7,7 +7,7 @@ comments: true
 ---
 
 
-I learned something new on an issue while trying to create a Custom Azure Policy to audit if an Azure Eventhub has a Private Link configured.
+I learned something new on an issue while trying to create a Custom Azure Policy to audit if an Azure Event Hub has a Private Link configured.
 
 Azure Private Link Service enables you to access Azure Services (for example, *Azure Event Hubs*, Azure Storage, and Azure Cosmos DB) and Azure hosted customer/partner services over a private endpoint in your virtual network.
 
