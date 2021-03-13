@@ -346,3 +346,7 @@ Hope you also learned something new.
 - [Microsoft Docs - Tutorial: Create a custom policy definition](https://docs.microsoft.com/en-us/azure/governance/policy/tutorials/create-custom-policy-definition)
 
 - [Daniel's Tech Blog - Trigger an on-demand Azure Policy compliance evaluation scan](https://www.danielstechblog.io/trigger-an-on-demand-azure-policy-compliance-evaluation-scan)
+
+- [Blog Post - Writing a Custom Azure Policy](https://journeyofthegeek.com/2021/03/07/writing-a-custom-azure-policy/)
+
+- [Github Repository - Testing Azure Policy](https://github.com/fawohlsc/azure-policy-testing)
