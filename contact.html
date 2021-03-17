@@ -5,12 +5,18 @@ permalink: /contact/
 ---
 
 <div>
-    <form action="https://formspree.io/{{ site.owner.email }}" method="POST" class="contact">
-        <input type="text" name="email" placeholder="Email Address" />
-        <textarea type="text" name="content" rows="10" placeholder="What would you like to say?"></textarea>
-        <input type="hidden" name="_next" value="/thanks.html" />
-        <input type="hidden" name="_subject" value="New Blog Contact!" />
-        <input type="text" name="_gotcha" style="display:none" />
-        <input type="submit" value="Send" />
-    </form>
+  <form action="https://formspree.io/f/myybrarz" method="POST">
+    <label>
+      Your email:
+      <input type="email" name="_replyto" />
+    </label>
+    <label>
+      Your message:
+      <textarea name="message"></textarea>
+    </label>
+
+    <!-- your other form fields go here -->
+
+    <button type="submit">Send</button>
+  </form>
 </div>
