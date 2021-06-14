@@ -16,13 +16,13 @@ At one of my customers we are using a WhatsApp group to share news about Azure a
 
 I would like to figure out if the following scenario can be implemented using Signal and Azure Logic Apps.
 
-![Process Flow](../assets/SignalAzureNewProcessFlow.png)
+![Process Flow](/assets/SignalAzureNewProcessFlow.png)
 
 So each time a new Azure news item is published this should be sent to a Signal Messenger group.
 
 ## Architecture
 
-![Architecture](../assets/SignalCLIRESTAPIArchitecture.png)
+![Architecture](/assets/SignalCLIRESTAPIArchitecture.png)
 
 An Azure Logic App is calling the Signal CLI REST API running in an Azure Web App for Containers to send messages the a Signal Messenger Group.
 
@@ -51,11 +51,11 @@ ard/signal-cli-rest-api" target="_blank">Dockerized Signal Messenger REST API</a
 
 Go to the Azure Portal and select Web App for Containers in the Azure Marketplace and click on Create.
 
-![](../assets/06-11-2021-01.png) 
+![](/assets/06-11-2021-01.png) 
 
 You now need to configure the Container settings of the Web App. Enter below information in these setting and save the setting. Use for the Docker Container image: bbernhard/signal-cli-rest-api:latest
 
-![Web App Configuration](../assets/2021-06-10_17-15-36.png)
+![Web App Configuration](/assets/2021-06-10_17-15-36.png)
 
 And click on Review + Create.
 
@@ -74,15 +74,15 @@ https://demo-for-signal-cli-rest-api.azurewebsites.net/v1/qrcodelink?device_name
 
 Open the url in your browser. 
 
-![Web App Configuration](../assets/2021-06-10_17-29-47.png)
+![Web App Configuration](/assets/2021-06-10_17-29-47.png)
 
 And scan the qrcode with your mobile Signal App via the menu.
 
-<a href="../assets/2021-06-10_17-32-31.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="..//assets/2021-06-10_17-32-31.png" border="0" /></a>
+<a href="/assets/2021-06-10_17-32-31.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="..//assets/2021-06-10_17-32-31.png" border="0" /></a>
 
 After a succesful link of the Device you should see the something like this in your Signal Mobile App.
 
-<a href="../assets/14-06-2021-01.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="..//assets/14-06-2021-01.png" border="0" /></a>
+<a href="/assets/14-06-2021-01.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="..//assets/14-06-2021-01.png" border="0" /></a>
 
 ### Test Signal-CLI-REST-API
 
@@ -160,11 +160,11 @@ Solution for " 316xxxxxxxx is not registered"  is unlinking Web App Device and r
 
 You can use tools like [HttpMaster](https://httpmaster.net/) to test your Signal-CLI-REST-API Web App.
 
-![HttpMaster send message call](../assets/2021-06-13_15-29-28.png)
+![HttpMaster send message call](/assets/2021-06-13_15-29-28.png)
 
 On you Signal Mobile App you should see the message appear.
 
-<a href="../assets/14-06-2021-02.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="../assets/14-06-2021-02.png" border="0" /></a>
+<a href="/assets/14-06-2021-02.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="/assets/14-06-2021-02.png" border="0" /></a>
 
 ### Logic App installation and configuration
 
@@ -174,31 +174,31 @@ After you have created the Azure Logic app go to the resource and open the Logic
 
 The end goal is to create the following Logic App Workflow.
 
-![Logic App Workflow](../assets/2021-06-14_15-12-16.png)
+![Logic App Workflow](/assets/2021-06-14_15-12-16.png)
 
 Start with selecting a Blank Logic App and search for the Schedule trigger and select Recurrence Schedule trigger.
 
-![Schedule trigger](../assets/2021-06-14_16-12-48.png)
+![Schedule trigger](/assets/2021-06-14_16-12-48.png)
 
-![Configure Schedule trigger](../assets/14-06-2021-03.png)
+![Configure Schedule trigger](/assets/14-06-2021-03.png)
 
 Next add the HTTP Built-in Action.
 
-![HTTP request Action](../assets/2021-06-14_16-15-48.png)
+![HTTP request Action](/assets/2021-06-14_16-15-48.png)
 
 Configure the following settings in the HTTP request trigger.
 
-![Configure HTTP request Action](../assets/2021-06-14_16-18-42.png)
+![Configure HTTP request Action](/assets/2021-06-14_16-18-42.png)
 
 Add the List all RSS feed items action as a next step and configure as shown below. I've used the following RSS feed url: 'https://techcommunity.microsoft.com/gxcuf89792/rss/Community?interaction.style=blog'
 
-![Add and configure List all RSS feed Items Action](../assets/2021-06-14_16-24-05.png) 
+![Add and configure List all RSS feed Items Action](/assets/2021-06-14_16-24-05.png) 
 
 The final steps are executed in the for each Control Action
 
-![Add and configure for each control action](../assets/2021-06-14_16-35-14.png) 
+![Add and configure for each control action](/assets/2021-06-14_16-35-14.png) 
 
-![Add and configure for each control action](../assets/2021-06-14_16-36-54.png) 
+![Add and configure for each control action](/assets/2021-06-14_16-36-54.png) 
 
 You need to add an extra delay to make sure the Signal-CLI-REST-API does not get too many requests at the same time.
 
@@ -208,35 +208,35 @@ But we are not completely finished. As a last step we are adding Authentication 
 
 To enable Authentication on the Web App you need to go to the Authentication setting.
 
-![Enable Authentication on Web App](../assets/2021-06-13_14-50-32.png) 
+![Enable Authentication on Web App](/assets/2021-06-13_14-50-32.png) 
 
 Click on Add Identity provider. Select Microsoft as Identity Provider
 
-![Configure Identity Provider](../assets/2021-06-13_14-51-44.png) 
+![Configure Identity Provider](/assets/2021-06-13_14-51-44.png) 
 
 Skip any permissions for now.
 
-![Identity Provider permissions](../assets/14-06-2021-04.png)
+![Identity Provider permissions](/assets/14-06-2021-04.png)
 
 Copy AppId/ClientID
 
-![AppID](../assets/2021-06-13_14-53-52.png)
+![AppID](/assets/2021-06-13_14-53-52.png)
 
 Change the **accessTokenAcceptedVersion** setting in the App Registration's manifest file from **null to 2**. If you don't do this you might end up with the following error message when calling the REST API:
 
 "IDX10205: Issuer validation failed. Issuer: '[PII is hidden]'. Did not match: validationParameters.ValidIssuer: '[PII is hidden]' or validationParameters.ValidIssuers: '[PII is hidden]'.""
 
-![App Registration Manifest file](../assets/2021-06-14_16-53-23.png)
+![App Registration Manifest file](/assets/2021-06-14_16-53-23.png)
 
 The final step after enabling the Authentication on the Web App is updating the Logic App Workflow actions to include the authentication.
 
 First turn on the System Assigned identity in the Logic App.
 
-![Logic App Managed Identity](../assets/2021-06-14_16-57-30.png)
+![Logic App Managed Identity](/assets/2021-06-14_16-57-30.png)
 
 The final steps are updating all HTTP Request actions with the authorization configuration. Select Managed Identity as Authentication type and use the earlier copied AppID (ClientID) as Audience setting.
 
-![Authentication setting for HTTP Request action](../assets/2021-06-14_16-59-30.png)
+![Authentication setting for HTTP Request action](/assets/2021-06-14_16-59-30.png)
 
 Repeat this for all the HTTP Requests in your Logic App Workflow!
 
