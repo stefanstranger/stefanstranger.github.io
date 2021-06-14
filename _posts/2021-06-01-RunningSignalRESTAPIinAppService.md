@@ -12,6 +12,8 @@ Because you can ;-) No seriously I was looking for way to integrate Signal's mes
 
 At one of my customers we are using a WhatsApp group to share news about Azure and I'm in the process of moving away from WhatsApp to Signal and this was a good incentive to figure out if I'm able to integrate Signal into some example Logic App flows. If you are looking for reasons to switch to Signal check this [Microsoft customer story](https://azure.microsoft.com/en-us/solutions/confidential-compute/#customer-stories) where Signal is sharing that it's using Azure confidential computing. There might be more reasons for moving or using Signal as your prefered messenger client ;-)
 
+I want to thank my colleagues Mohammad Shboul and [Christo Matskas](https://twitter.com/ChristosMatskas) for helping out with some questions I had implementing this solution.
+
 # Scenario
 
 I would like to figure out if the following scenario can be implemented using Signal and Azure Logic Apps.
@@ -78,11 +80,11 @@ Open the url in your browser.
 
 And scan the qrcode with your mobile Signal App via the menu.
 
-<a href="/assets/2021-06-10_17-32-31.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="..//assets/2021-06-10_17-32-31.png" border="0" /></a>
+<a href="https://stefanstranger.github.io//assets/2021-06-10_17-32-31.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="https://stefanstranger.github.io//assets/2021-06-10_17-32-31.png" border="0" /></a>
 
 After a succesful link of the Device you should see the something like this in your Signal Mobile App.
 
-<a href="/assets/14-06-2021-01.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="..//assets/14-06-2021-01.png" border="0" /></a>
+<a href="https://stefanstranger.github.io//assets/14-06-2021-01.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="https://stefanstranger.github.io//assets/14-06-2021-01.png" border="0" /></a>
 
 ### Test Signal-CLI-REST-API
 
@@ -327,3 +329,4 @@ Hope you learned something new.
 - [Azure Logic Apps](https://docs.microsoft.com/en-us/azure/logic-apps/)
 - [Power Automate](https://flow.microsoft.com)
 - [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens)
+- [Youtube - Using managed identity with your APIs (even from logic apps!)](https://www.youtube.com/watch?v=TgJiC_GO1Qk)
