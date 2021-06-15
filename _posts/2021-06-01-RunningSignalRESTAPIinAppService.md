@@ -14,6 +14,17 @@ At one of my customers we are using a WhatsApp group to share news about Azure a
 
 I want to thank my colleagues Mohammad Shboul and [Christo Matskas](https://twitter.com/ChristosMatskas) for helping out with some questions I had implementing this solution.
 
+- [Scenario](#scenario)
+  - [Architecture](#architecture)
+  - [Implementation steps](#implementation-steps)
+    - [Create Resource Group](#create-resource-group)
+    - [Deploy and configure the Azure Web (for Containers)](#deploy-and-configure-the-azure-web-for-containers)
+    - [Link Signal CLI REST API Web App](#link-signal-cli-rest-api-web-app)
+    - [Test Signal-CLI-REST-API](#test-signal-cli-rest-api)
+    - [Logic App installation and configuration](#logic-app-installation-and-configuration)
+    - [Authentication for the Web App](#authentication-for-the-web-app)
+- [References:](#references)
+
 # Scenario
 
 I would like to figure out if the following scenario can be implemented using Signal and Azure Logic Apps.
@@ -203,6 +214,10 @@ The final steps are executed in the for each Control Action
 ![Add and configure for each control action](/assets/2021-06-14_16-36-54.png) 
 
 You need to add an extra delay to make sure the Signal-CLI-REST-API does not get too many requests at the same time.
+
+In the for each control setting you also need to set the Concurrency Control to Off. By default, the for each control runs the actions in parallel and that cannot be handled by the Signal-CLI-REST-API running in the Web App.
+
+![Concurrency Control setting](/assets/14-06-2021-05.png)
 
 But we are not completely finished. As a last step we are adding Authentication on the Web App to make sure only authenticated users can call the REST API running in the Web App.
 
