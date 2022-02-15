@@ -14,7 +14,7 @@ But recently I again wanted to automatically update an Azure DevOps Markdown Wik
 
 The complete process looks like this 👇
 
-![](../assets/15-02-2022-02.png)
+![Process overview](/assets/15-02-2022-02.png)
 
 In this blog post I'm only discussing the steps 2, 3 and 4. For the other steps please have a look at my earlier blog posts on this topic.
 
