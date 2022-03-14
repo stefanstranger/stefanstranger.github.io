@@ -24,7 +24,7 @@ For those following me on <a href="https://twitter.com/sstranger/status/15027445
 
 # Scenario
 
-I don't know about you but within our Microsoft team we have a Microsoft Teams chat group where we communicate within our team about all kind of topics but it's also used to congratulate people on their birthdays. Often one congratulates a collegueue and then the rest of the team also congratulates that team member. 
+I don't know about you but within our Microsoft team we have a Microsoft Teams chat group where we communicate within our team about all kind of topics but it's also used to congratulate people on their birthdays. Often one congratulates a colleague and then the rest of the team also congratulates that team member. 
 
 One time it was jokingly mentioned that the initial birthday congratulation was automated, and that got me thinking. Why not try to automate my birthday congratulation Teams Group Chat message when someone congratulates someone within our Microsoft Teams Chat Group?
 
