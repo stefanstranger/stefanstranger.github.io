@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Az REST Cli to the Rescue
+title: Az CLI REST Command to the Rescue
 categories: [Az CLI, REST API, Automation]
 tags: [Az CLI, REST API, Automation]
 comments: true
