@@ -10,7 +10,7 @@ comments: true
 - [REST API process flow](#rest-api-process-flow)
 - [Example Azure Resource Manager REST API call](#example-azure-resource-manager-rest-api-call)
   - [Steps 1 & 2 Login to the Authorization Server and get Token](#steps-1--2-login-to-the-authorization-server-and-get-token)
-  - [Steps 2 & 3 Use Token to get overview of Azure Subscroptions](#steps-2--3-use-token-to-get-overview-of-azure-subscroptions)
+  - [Steps 2 & 3 Use Token to get overview of Azure Subscriptions](#steps-2--3-use-token-to-get-overview-of-azure-subscriptions)
 - [Using the Az CLI REST Command](#using-the-az-cli-rest-command)
 - [References:](#references)
 
@@ -73,7 +73,7 @@ Invoke-RestMethod @params -OutVariable AccessToken
 #endregion
 ```
 
-## Steps 2 & 3 Use Token to get overview of Azure Subscroptions
+## Steps 2 & 3 Use Token to get overview of Azure Subscriptions
 
 ```PowerShell
 
@@ -108,7 +108,7 @@ In this specific case I know the url that I want to call.
 |----------------|
 | GET https://api.loganalytics.io/v1/workspaces/{workspaceId}/query?query={query}| 
 
-But I don't have the information for getting an Access Token except that I need authenticate through Azure Active Directory (Azure AD). From the previous example we have learned that we need to know the scope to get the correct Access Token.
+But I don't have the information for getting an Access Token except that I need to authenticate through Azure Active Directory (Azure AD). From the previous example we have learned that we need to know the scope to get the correct Access Token.
 
 Let's start with using the Az CLI and start to with the login.
 
@@ -120,13 +120,13 @@ Screenshot from az login command
 
 ![](/assets/20-09-2022-04.png)
 
-According to the documentation of az rest, this command automatically authenticates using the logged-in credential: If Authorization header is not set, it attaches header Authorization: Bearer <token>, where <token> is retrieved from AAD. The target resource of the token is derived from --url if --url starts with an endpoint from az cloud show --query endpoints.
+According to the documentation of az rest, this command automatically authenticates using the logged-in credential: If Authorization header is not set, it attaches header Authorization: Bearer \<token\>, where \<token\> is retrieved from AAD. The target resource of the token is derived from --url if --url starts with an endpoint from az cloud show --query endpoints.
 
-The az cli has a --debug switch which can help to get all the info we are looking for. To be able to show the debug stream we open a command prompt (not a PowerShell) and run the following:
+The az cli has a \-\-debug switch which can help to get all the info we are looking for. To be able to show the debug stream we open a command prompt (not a PowerShell) and run the following:
 
 
 ```cmd
- az rest --method get --url "https://api.loganalytics.io/v1/workspaces/{workspace}/query?query={query]" --debug
+ az rest --method get --url "https://api.loganalytics.io/v1/workspaces/{workspace}/query?query={query}" --debug
 ```
 
 The debug info provides us with all the information we are looking for.
@@ -179,8 +179,7 @@ $params = @{
 }
 
 Invoke-RestMethod @params | Select-Object -ExpandProperty tables
-#endregiont
-
+#endregion
 ```
 
 Screenshot of result.
