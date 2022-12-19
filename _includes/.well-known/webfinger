@@ -1,0 +1,23 @@
+{
+    "subject": "acct:sstranger@techhub.social",
+    "aliases": [
+        "https://techhub.social/@sstranger",
+        "https://techhub.social/users/sstranger"
+    ],
+    "links": [
+        {
+            "rel": "http://webfinger.net/rel/profile-page",
+            "type": "text/html",
+            "href": "https://techhub.social/@sstranger"
+        },
+        {
+            "rel": "self",
+            "type": "application/activity+json",
+            "href": "https://techhub.social/users/sstranger"
+        },
+        {
+            "rel": "http://ostatus.org/schema/1.0/subscribe",
+            "template": "https://techhub.social/authorize_interaction?uri={uri}"
+        }
+    ]
+}
