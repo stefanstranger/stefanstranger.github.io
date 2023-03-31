@@ -114,6 +114,52 @@ Some more columns are added to the final query result and with the last project 
 
 Overall, this query uses a series of join and extend operations to extract and transform information about virtual networks and their subnets in Azure Resource Graph, and then calculates the number of available IP addresses in each subnet based on the subnet prefix length. The resulting table provides a useful summary of the IP address usage in an Azure environment.
 
+This is already a great start but we would also want to exclude the number of IP addresses currently in use. For that we need to add an extra join in our query where we get the number of connected devices per Virtual Network and Subnet.
+
+```sql
+resources
+| join kind=leftouter(
+    ResourceContainers 
+    | where type=='microsoft.resources/subscriptions' 
+    | project subscriptionName=name, subscriptionId
+) on subscriptionId
+| where type =~ 'Microsoft.Network/virtualNetworks'
+| extend addressPrefixes=array_length(properties.addressSpace.addressPrefixes)
+| extend vNetAddressSpace=properties.addressSpace.addressPrefixes
+| mv-expand subnet=properties.subnets
+| extend virtualNetwork = name
+| extend subnetPrefix = subnet.properties.addressPrefix
+| extend subnets = properties.subnets
+| extend subnetName = tostring(subnet.name)
+| extend prefixLength = toint(split(subnetPrefix, "/")[1])
+| extend addressPrefix = split(subnetPrefix, "/")[0]
+| extend numberOfIpAddresses = trim_end(".0",tostring(pow(2, 32 - prefixLength) - 5))
+| extend startIp = strcat(strcat_array((array_slice(split(addressPrefix, '.'), 0, 2)),"."), ".", tostring(0))
+| extend endIp = strcat(strcat_array((array_slice(split(addressPrefix, '.'), 0, 2)),"."), ".", trim_end(".0",tostring(pow(2, 32 - prefixLength) - 5))) 
+| join kind=leftouter (
+    // Number of connected devices per VNet and Subnet
+    resources
+    | join kind=leftouter(
+        resourcecontainers 
+        | where type=='microsoft.resources/subscriptions' 
+        | project subscriptionName=name, subscriptionId
+    ) on subscriptionId
+    | where type =~ 'microsoft.network/networkinterfaces'
+    | project id, ipConfigurations = properties.ipConfigurations, virtualMachine = tostring(split(properties.virtualMachine.id,"/",8)[0]), subscriptionName
+    | mvexpand ipConfigurations
+    | project id, subnetId = tostring(ipConfigurations.properties.subnet.id), subscriptionName, virtualMachine
+    | parse kind=regex subnetId with '/virtualNetworks/' virtualNetwork '/subnets/' subnet
+    | extend resourceGroup = tostring(split(subnetId,"/",4)[0])
+    | extend subnetName = subnet
+    | summarize usedIPAddresses = count() by subnetName, virtualNetwork, subscriptionName
+)
+on subnetName, virtualNetwork, subscriptionName
+| extend usedIPAddresses_new = iff(isnull(usedIPAddresses),0,usedIPAddresses)
+| project subscriptionName, resourceGroup, virtualNetwork, SubnetName = subnet.name, IPRange = strcat(startIp, " - ", endIp), numberOfIpAddresses, usedIPAddresses, AvailableIPAddresses = (toint(numberOfIpAddresses) - usedIPAddresses_new)
+```
+
+![Screenshot of resuls of final Azure Resource Manager Kust query](/assets/03-29-2023-03.png)
+
 And there you have it! With just a few ~~simple~~ commands, you can retrieve the number of available IP addresses in your Azure Virtual Network and Subnets. No more counting grains of sand on the beach.
 
 I hope you learned something new and useful.
