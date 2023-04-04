@@ -9,6 +9,16 @@ comments: true
 - [How to calculate the number of IP addresses?](#how-to-calculate-the-number-of-ip-addresses)
 - [Azure Resource Graph](#azure-resource-graph)
 
+**UPDATE - 04/04/2022**
+
+ After some more tests I found out that when the subnet mask is less or equal to 23 (512 possible IP addresses) the end IP address of the initial Azure Resource Graph query was incorrect.
+
+See here an example screenshot.
+
+![Picture of results showing the incorrect end ip address results from previous kusto query](/assets/03-29-2023-04.png)
+
+With the updated Kusto query this is now resolved.
+
 Hi friends, I want to share with you a pretty cool Kusto Azure Resource Graph query that helped me in different scenario's where I needed to know the available number of IP addresses within an Azure Virtual Network and Subnet. I know, I know, it doesn't sound very exciting at first, but bear with me - I promise you won't regret it!
 
 So, picture this: you're a cloud engineer, working hard to manage your organization's Azure Virtual Network and Subnets. You've got a lot on your plate, from configuring network security groups to setting up VPN gateways, but there's one task that always seems to elude you: figuring out how many available IP addresses you have in your virtual network and subnets. It's like trying to count the number of grains of sand on a beach - impossible!
@@ -135,7 +145,18 @@ resources
 | extend addressPrefix = split(subnetPrefix, "/")[0]
 | extend numberOfIpAddresses = trim_end(".0",tostring(pow(2, 32 - prefixLength) - 5))
 | extend startIp = strcat(strcat_array((array_slice(split(addressPrefix, '.'), 0, 2)),"."), ".", tostring(0))
-| extend endIp = strcat(strcat_array((array_slice(split(addressPrefix, '.'), 0, 2)),"."), ".", trim_end(".0",tostring(pow(2, 32 - prefixLength) - 5))) 
+| extend endIp = strcat(strcat_array((array_slice(split(addressPrefix, '.'), 0, 2)),"."), ".", trim_end(".0",tostring(pow(2, 32 - prefixLength) - 5)))
+| extend endIPNew = case(prefixLength == 23, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), "."), "."),'1.255'),
+    prefixLength == 22, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), "."), "."),'3.255'),
+    prefixLength == 21, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), "."), "."),'7.255'),
+    prefixLength == 20, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), "."), "."),'15.255'),
+    prefixLength == 19, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), "."), "."),'31.255'),
+    prefixLength == 18, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), "."), "."),'63.255'),
+    prefixLength == 17, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), "."), "."),'127.255'),
+    prefixLength == 16, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), "."), "."),'255.255'),
+    'unknown'
+)
+| extend finalendIPaddress = iff(endIPNew == "unknown", endIp, endIPNew) 
 | join kind=leftouter (
     // Number of connected devices per VNet and Subnet
     resources
@@ -155,10 +176,10 @@ resources
 )
 on subnetName, virtualNetwork, subscriptionName
 | extend usedIPAddresses_new = iff(isnull(usedIPAddresses),0,usedIPAddresses)
-| project subscriptionName, resourceGroup, virtualNetwork, SubnetName = subnet.name, IPRange = strcat(startIp, " - ", endIp), numberOfIpAddresses, usedIPAddresses, AvailableIPAddresses = (toint(numberOfIpAddresses) - usedIPAddresses_new)
+| project subscriptionName, resourceGroup, virtualNetwork, SubnetName = subnet.name, IPRange = strcat(startIp, " - ", finalendIPaddress), numberOfIpAddresses, usedIPAddresses, AvailableIPAddresses = (toint(numberOfIpAddresses) - usedIPAddresses_new)
 ```
 
-![Screenshot of resuls of final Azure Resource Manager Kust query](/assets/03-29-2023-03.png)
+![Screenshot of results of final Azure Resource Manager Kusto query](/assets/03-29-2023-03.png)
 
 And there you have it! With just a few ~~simple~~ commands, you can retrieve the number of available IP addresses in your Azure Virtual Network and Subnets. No more counting grains of sand on the beach.
 
