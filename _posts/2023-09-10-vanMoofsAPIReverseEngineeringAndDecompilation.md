@@ -448,7 +448,7 @@ For this I decided to do some reverse engineering and decompilation on their API
 
 It all started with the idea that I wanted to retrieve the following data being shown in their mobile application.
 
-<img src="../assets/09-10-2023-04.png" alt="Screenshot of vanMoof Android Mobile app with an overview of all the rides" width="300"/>
+<img src="/assets/09-10-2023-04.png" alt="Screenshot of vanMoof Android Mobile app with an overview of all the rides" width="300"/>
 
 My starting point was the Android vanMoof mobile app. I used the [apktool](https://ibotpeaches.github.io/Apktool/) to decompile the vanMoof mobile app. It is a tool for reverse engineering 3rd party, closed, binary Android apps. It can decode resources to nearly original form and rebuild them after making some modifications; it makes possible to debug smali code step by step. Also it makes working with app easier because of project-like files structure and automation of some repetitive tasks like building apk, etc.
 
@@ -458,7 +458,7 @@ I used the following command to decompile the vanMoof mobile app:
 apktool d vanmoof.apk
 ```
 
-![Screenshot of using apktool to decompile vanMoof Android App](../assets/09-10-2023-02.png)
+![Screenshot of using apktool to decompile vanMoof Android App](/assets/09-10-2023-02.png)
 
 For that you first need to download the vanMoof mobile app from the Google Play Store. You can use **[APKCombo](https://apkcombo.com/vanmoof/nl.samsonit.vanmoofapp/)** to download the vanMoof mobile app apk file. The reason why I recommend AKPCombo is that they offer also older versions of the Android Apps for which you want to download the apk file for.
 
@@ -482,7 +482,7 @@ Let's improve the regex a bit more and add that that we are looking for <u>rest 
 
 We have now found the following endpoints in the vanMoof's Android application code.
 
-![Screenshot of Visual Studio Code with a regex search query](../assets/09-10-2023-03.png)
+![Screenshot of Visual Studio Code with a regex search query](/assets/09-10-2023-03.png)
 
 Let's first have a look in the m.smali file that contains the "<u>https://api.vanmoof-api.com/v8</u>" url. Smali is the assembly language used by the Android Dalvik Virtual Machine.
 
@@ -490,7 +490,7 @@ When we look at the contents of the m.smali file we only see that this is probab
 
 We know we need to authenticate before being able to access most of the REST API's. When we search the files for the string "authenticate" we find an interesting file called o.smali which gives us some more clues.
 
-![](../assets/09-10-2023-05.png)
+![](/assets/09-10-2023-05.png)
 
 From existing [vanMoof API documentation](https://github.com/stefanstranger/vanMoof) we know that the following REST API will authenticate a vanMoof user and download the customers data. So we don't need to further investigate how the vanMoof's authentication works, by looking the decompiled apk files.
 
@@ -508,7 +508,7 @@ As you see the authentication endpoint is: "<u>https://my.vanmoof.com/api/v8/aut
 
 If we search the o.smali file also for "getCustomerData" we again find this endpoint, so we are getting somewhere.
 
-![Screenshot of 0.smali file with search query on getCustomerData string](../assets/09-10-2023-06.png)
+![Screenshot of 0.smali file with search query on getCustomerData string](/assets/09-10-2023-06.png)
 
 **But how to find the complete uri, including the api endpoint?**
 
@@ -553,11 +553,11 @@ URL: https://my.vanmoof.com/api/v8/v1/getCustomerData?IncludeBikeDetails
 
 We already knew that this should work based on documentation found online, but here is the REST API call using curl.
 
-![Screenshot of rest api call to vanmoof api endpoint using curl in terminal](../assets/09-10-2023-07.png)
+![Screenshot of rest api call to vanmoof api endpoint using curl in terminal](/assets/09-10-2023-07.png)
 
 As a final test we can try some more endpoints found in the smali file. What is the desired update version info? As we can see in below screenshot this function has the bikeId as parameter. 
 
-![Screenshot of an Android smali file in visual studio code with a red box on a text string with getdesiredUpdateversionInfo with bikeId](../assets/09-10-2023-08.png)
+![Screenshot of an Android smali file in visual studio code with a red box on a text string with getdesiredUpdateversionInfo with bikeId](/assets/09-10-2023-08.png)
 
 ## Get Desired Update Version information
 
@@ -583,7 +583,7 @@ URL: https://my.vanmoof.com/api/v8/getDesiredUpdateVersionInfo/{bikeId}
 | --- | ------|-------------|
 | bikeId | {{bikeId}} | BikeId is the ID of your vanMoof bike. Can be found using with Get Customer Data (include Bike Details) |
 
-![Screenshot of terminal with curl command to retrieve desired update version info from the vanMoof REST API](../assets/09-10-2023-09.png)
+![Screenshot of terminal with curl command to retrieve desired update version info from the vanMoof REST API](/assets/09-10-2023-09.png)
 
 ## Rides
 
@@ -597,7 +597,7 @@ With the following regular expression we can search for strings starting with a 
 
 This already gives us the file which we can further investigate.
 
-![Screenshot of regex search results in Visual Studio Code](../assets/09-10-2023-10.png)
+![Screenshot of regex search results in Visual Studio Code](/assets/09-10-2023-10.png)
 
 With this regular expression search we found the following paths.
 
@@ -651,7 +651,7 @@ To find the riderId we could start with the earlier collected Customer Data.
 Until now we have used curl to call and test the vanMoof rest apis. Using some tools, like PostMan or [ThunderClient](https://www.thunderclient.com/) in [Visual Studio Code](https://code.visualstudio.com) makes calling REST APIs a bit easier. From now on I'll be using the Visual Studio Code's Extension called ThunderClient. 
 
 Ok let's continue with our tests in Visual Studio Code. When we test the following endpoint using the Authorization header using basic authentication we used when getting the Customer Data (include Bike Details) we get an "Unauthorized" error.
-![Screenshot if REST API call in Visual Studio Code using the Thunder Client extension with an error message with value Unauthorized](../assets/09-10-2023-11.png)
+![Screenshot if REST API call in Visual Studio Code using the Thunder Client extension with an error message with value Unauthorized](/assets/09-10-2023-11.png)
 
 In PowerShell this call looks like this.
 
@@ -712,19 +712,19 @@ I'm skipping the first 2 steps, because these should be simple to do on your own
 
 Create a new Virtual Device using the Virtual Device Manager.
 
-![](../assets/09-10-2023-21.png)
+![](/assets/09-10-2023-21.png)
 
 Click on "Create Device" to get started. We now need to select the Hardware and secondly we need to select the System Image (Android OS Version)
 
 I selected the Pixel 7 for the hardware.
 
-![Screenshot of Android Studio with the start of creating a Virtual Device Configuration selecting the Pixel 7 as hardware](../assets/09-10-2023-14.png)
+![Screenshot of Android Studio with the start of creating a Virtual Device Configuration selecting the Pixel 7 as hardware](/assets/09-10-2023-14.png)
 
 Click Next to select the System Image. Make sure you select non Google Target image! Otherwise you cannot enable root on this Android Virtual Device later!
 
 I selected the x86 image with Release Name S and API level 31 and Target OS Android 12.0.
 
-![Screenshot of Android Studio with the start of creating a Virtual Device Configuration selecting the System Image for the Android Virtual Device](../assets/09-10-2023-15.png)
+![Screenshot of Android Studio with the start of creating a Virtual Device Configuration selecting the System Image for the Android Virtual Device](/assets/09-10-2023-15.png)
 
 The final step is giving this Android Virtual Device (AVD) a name and hit finish.
 
@@ -732,7 +732,7 @@ The final step is giving this Android Virtual Device (AVD) a name and hit finish
 
 The first step is to start the earlier installed mitmweb (webui). A browser window should be opened showing that the mitmproxy is running.
 
-![Screenshot of the Edge browser showing the output of the started mitmproxy application](../assets/09-10-2023-17.png)
+![Screenshot of the Edge browser showing the output of the started mitmproxy application](/assets/09-10-2023-17.png)
 
 Now it's time to start the AVD from the command prompt with the following command.
 
@@ -744,7 +744,7 @@ You can find the name of the AVD, you just created with the following command:
 
 On Windows the command emulator.exe is located in your "~\AppData\Local\Android\Sdk\emulator" folder.
 
-<img src="../assets/09-10-2023-18.png" alt="Screenshot of Windows terminal showing the output of the command emulator -list-avds" width="500"/>
+<img src="/assets/09-10-2023-18.png" alt="Screenshot of Windows terminal showing the output of the command emulator -list-avds" width="500"/>
 
 Start the AVD with the following command:
 
@@ -753,7 +753,7 @@ Start the AVD with the following command:
 ```
 The AVD Should not be started.  
   
-![Screenshot of both the Android Virtual Device and the Windows terminal that started the Android Virtual Device](../assets/09-10-2023-22.png)
+![Screenshot of both the Android Virtual Device and the Windows terminal that started the Android Virtual Device](/assets/09-10-2023-22.png)
 
 ### 3. Install mitmproxy certificate
 
@@ -765,23 +765,23 @@ a. Install DuckDuckGo browser via downloaded apk on AVD. We need this to have a 
    
    You can just drag and drop the downloaded apk file on the AVD.   
   
-    <img src="../assets/09-10-2023-23.png" alt="Android Virtual Device screenshot with installing the DuckDuckGo browser" width="200"/>
+    <img src="/assets/09-10-2023-23.png" alt="Android Virtual Device screenshot with installing the DuckDuckGo browser" width="200"/>
 
 b. Install mitmproxy certificate as User.
 
    Go to mitm.it in your browser (DuckDuckGo) and download the certificate.
    
-   <img src="../assets/09-10-2023-24.png" alt="Android Virtual Device screenshot with in a browser the url mitm.it and the installation guideline to install the mitmproxy certificate" width="200"/>
+   <img src="/assets/09-10-2023-24.png" alt="Android Virtual Device screenshot with in a browser the url mitm.it and the installation guideline to install the mitmproxy certificate" width="200"/>
 
    Install the certificate via Settings -> Security -> Advanced -> Encryption and credentials -> Install a certificate -> CA certificate. Select the option Install Anyway.
    
-   <img src="../assets/09-10-2023-25.png" alt="Android Virtual Device screenshot with the first step to install a certificate" width="200"/>
+   <img src="/assets/09-10-2023-25.png" alt="Android Virtual Device screenshot with the first step to install a certificate" width="200"/>
    
-   <img src="../assets/09-10-2023-27.png" alt="Android Virtual Device screenshot with the second step to install a certificate" width="200"/>
+   <img src="/assets/09-10-2023-27.png" alt="Android Virtual Device screenshot with the second step to install a certificate" width="200"/>
    
-   <img src="../assets/09-10-2023-26.png" alt="Android Virtual Device screenshot with the third step to install a certificate" width="200"/>
+   <img src="/assets/09-10-2023-26.png" alt="Android Virtual Device screenshot with the third step to install a certificate" width="200"/>
    
-   <img src="../assets/09-10-2023-28.png" alt="Android Virtual Device screenshot with the final step to install a certificate" width="200"/>
+   <img src="/assets/09-10-2023-28.png" alt="Android Virtual Device screenshot with the final step to install a certificate" width="200"/>
    
 b. Move the User Certificate to Root CA store
 
@@ -804,15 +804,15 @@ c. Copy the installed user certificate to the ca root certificates folder.
      # cp /data/misc/user/0/cacerts-added/* /system/etc/security/cacerts
    ```
 
-![Screenshot with the Android Virtual Device showing DuckDuckGo browser icon and Windows terminal showing a split screen of the VDC emulator running and in the other split screen the adb command being run](../assets/09-10-2023-29.png)
+![Screenshot with the Android Virtual Device showing DuckDuckGo browser icon and Windows terminal showing a split screen of the VDC emulator running and in the other split screen the adb command being run](/assets/09-10-2023-29.png)
 
 Screenshot of moved certificate.
 
-![Screenshot of Windows Terminal showing the user certificate being moved via the command line ](../assets/09-10-2023-30.png)
+![Screenshot of Windows Terminal showing the user certificate being moved via the command line ](/assets/09-10-2023-30.png)
 
 The AVD now has the mitmproxy certificate as trusted system credential.
 
-<img src="../assets/09-10-2023-31.png" alt="Screenshot of the emulated Android Device showing the mitmproxy certificate as system trusted credential" width="200"/>
+<img src="/assets/09-10-2023-31.png" alt="Screenshot of the emulated Android Device showing the mitmproxy certificate as system trusted credential" width="200"/>
 
 **References:**
 - https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb?permalink_comment_id=3499340&wt.mc_id=SEC-MVP-5004985#gistcomment-3499340
@@ -828,13 +828,13 @@ Launch the application and start monitoring the network traffic in your mitmprox
 
 Start the Bikey Android Application while the mitmproxy is running and configured for the AVD to use.
 
-![Screenshot of both the emulated Android Device running the Bikey Android App and the edge browser running the mitmproxy with the https calls being made via the mitmproxy](../assets/09-10-2023-32.png)
+![Screenshot of both the emulated Android Device running the Bikey Android App and the edge browser running the mitmproxy with the https calls being made via the mitmproxy](/assets/09-10-2023-32.png)
 
 You should now see the network traffic appear in the mitmproxy browser window.
 
 Click each line to get more information on the rest api call being made by the Android Application running on the AVD. 
 
-![Screenshot of the Edge Browser with the details of one of the selected https rest api calls. Showing the Response results.](../assets/09-10-2023-33.png)
+![Screenshot of the Edge Browser with the details of one of the selected https rest api calls. Showing the Response results.](/assets/09-10-2023-33.png)
 
 As you see mitmproxy is able to decrypt the https traffic generated by the Android Application running on the AVD with the mitmproxy certificate installed.
 
