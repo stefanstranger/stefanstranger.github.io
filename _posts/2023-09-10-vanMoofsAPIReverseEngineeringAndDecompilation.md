@@ -761,15 +761,15 @@ The next step is to install the mitm proxy certificate on the AVD.
 
 a. Install DuckDuckGo browser via downloaded apk on AVD. We need this to have a browser to access the mitm.it website to download the certificate.
 
-   Download via: https://apkcombo.com/duckduckgo/com.duckduckgo.mobile.android/
+Download via: https://apkcombo.com/duckduckgo/com.duckduckgo.mobile.android/
    
-   You can just drag and drop the downloaded apk file on the AVD.   
+You can just drag and drop the downloaded apk file on the AVD.
   
-    <img src="/assets/09-10-2023-23.png" alt="Android Virtual Device screenshot with installing the DuckDuckGo browser" width="200"/>
+<img src="/assets/09-10-2023-23.png" alt="Android Virtual Device screenshot with installing the DuckDuckGo browser" width="200"/>
 
 b. Install mitmproxy certificate as User.
 
-   Go to mitm.it in your browser (DuckDuckGo) and download the certificate.
+Go to mitm.it in your browser (DuckDuckGo) and download the certificate.
    
    <img src="/assets/09-10-2023-24.png" alt="Android Virtual Device screenshot with in a browser the url mitm.it and the installation guideline to install the mitmproxy certificate" width="200"/>
 
