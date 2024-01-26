@@ -71,7 +71,7 @@ The PresenceLight Custom API also supports the usage of the following variables 
 | `{`{activity`}`} | Graph API Teams Activity Status |
 
 ```json
-{   "text": "Teams Status is {{{availability}}}",   "rainbow": true,   "duration": 10 }
+{   "text": "Teams Status is `{`{availability`}`}",   "rainbow": true,   "duration": 10 }
 ```
 
 The next step is configure the Custom API settings of PresenceLight with the Uri and JSON Body information.
@@ -82,8 +82,7 @@ In PresenceLight Custom API setting you need to enter the following information:
 
 | Method | Uri            | Body |
 |--------|----------------|------|
-| POST   | http://[IP]/api/notify|    {   "text": "Teams Status is {{availability}}",   "rainbow": true,   "duration": 10 }  |
-
+| POST   | http://[IP]/api/notify|    {   "text": "Teams Status is `{`{availability`}`}",   "rainbow": true,   "duration": 10 }  |
 
 And how can use this with Home Assistant?
 
