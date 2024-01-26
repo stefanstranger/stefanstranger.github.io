@@ -68,11 +68,10 @@ The PresenceLight Custom API also supports the usage of the following variables 
 <div class="aside">
   <meta charset="UTF-8">
   <ul>
-      <li>{{availability}}</li>
-      <li>{{activity}}</li>
+      <li>\{{availability}\}</li>
+      <li>\{{activity}\}</li>
   </ul>
 </div>
-<!DOCTYPE html>
 
 So above example JSON body can also use the {{availability}} variable.
 
