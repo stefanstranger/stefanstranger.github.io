@@ -23,13 +23,13 @@ When I investigated PresenceLight I noticed that it didn't supported my [IKEA Sm
 
 After further investigation I found out that this Custom API feature did not have the option to provide a JSON body to the REST API calls made to configured endpoints 😒
 
-<img src="/assets2024-01-23-01.png" alt="Image of configuration screen of Custom API settings from Presence Light without the option to provide a body" width="1000"/>
+<img src="/assets/2024-01-23-01.png" alt="Image of configuration screen of Custom API settings from Presence Light without the option to provide a body" width="1000"/>
 
 This was a small disappointment because most of the REST API calls also require a body to be send. So I contacted the developer of PresenceLight, Isaac Levin via a [Github issue](https://github.com/isaacrlevin/presencelight/issues/848) and asked if he could add support for providing a body to the Custom API REST API call functionality.
 
 Isaac responded that he was happy to review a PR for this new functionality to be added.  
   
- ![Meme with a male person, and the text "That's not to e unexpected"](/assets2024-01-23-02.gif)
+ ![Meme with a male person, and the text "That's not to e unexpected"](/assets/2024-01-23-02.gif)
 
 The only thing left to do was accept this challenge, especially because I'm not a real developer. I call myself a wannabee Developer. But with the help of [Github Copilot](https://github.com/features/copilot) I was able to add this functionality to PresenceLight🎉🙏
 
@@ -76,7 +76,7 @@ So above example JSON body can also use the {{availability}} variable.
 
 The next step is configure the Custom API settings of PresenceLight with the Uri and JSON Body information.
 
-<img src="/assets2024-01-23-03.png" alt="PresenceLight Custom API setting pane, showing the configuration of the REST API call to the Ulanzi Pixel Clock" width="1000"/>
+<img src="/assets/2024-01-23-03.png" alt="PresenceLight Custom API setting pane, showing the configuration of the REST API call to the Ulanzi Pixel Clock" width="1000"/>
 
 In PresenceLight Custom API setting you need to enter the following information:
 
@@ -157,7 +157,7 @@ In PresenceLight Custom API setting you need to enter the following information:
 
 This is how simple it now is to use the PresenceLight Custom API and a JSON Body.
 
-![Meme with the text "Oh Yeah, Oh Yeah"](/assets2024-01-23-04.gif)
+![Meme with the text "Oh Yeah, Oh Yeah"](/assets/2024-01-23-04.gif)
 
 # References:
 
