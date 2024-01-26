@@ -67,11 +67,11 @@ The PresenceLight Custom API also supports the usage of the following variables 
 
 | Variables | Value |
 |-|-|
-| "{{availability}}" | Graph API Teams Availability Status |
-| "{{activity}}" | Graph API Teams Activity Status |
+| `{`{availability`}`} | Graph API Teams Availability Status |
+| `{`{activity`}`} | Graph API Teams Activity Status |
 
 ```json
-{   "text": "Teams Status is ""{{availability}}""",   "rainbow": true,   "duration": 10 }
+{   "text": "Teams Status is `{`{availability`}`}",   "rainbow": true,   "duration": 10 }
 ```
 
 The next step is configure the Custom API settings of PresenceLight with the Uri and JSON Body information.
