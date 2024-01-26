@@ -74,6 +74,9 @@ The PresenceLight Custom API also supports the usage of the following variables 
 {   "text": "Teams Status is `{`{availability`}`}",   "rainbow": true,   "duration": 10 }
 ```
 
+**Remark:**
+Remove the backticks from above json code. Without the backticks the curly brackets didnot show in the blog post.
+
 The next step is configure the Custom API settings of PresenceLight with the Uri and JSON Body information.
 
 <img src="/assets/2024-01-23-03.png" alt="PresenceLight Custom API setting pane, showing the configuration of the REST API call to the Ulanzi Pixel Clock" width="1000"/>
