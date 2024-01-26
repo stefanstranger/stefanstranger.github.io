@@ -65,8 +65,10 @@ This will display the text "Teams Status is Available" in rainbow colors for 10 
 
 The PresenceLight Custom API also supports the usage of the following variables in the Custom API JSON body.
 
-- {{availability}} 
+```json
+- {{availability}}
 - {{activity}}
+```
 
 So above example JSON body can also use the {{availability}} variable.
 
