@@ -112,7 +112,7 @@ Because we needed 16 ip addresses we need a minimum of 16 + 5 addresses that's w
 
 The solution can be used via the interactive online version or you can use this in a programmatic way by calling the solution via a REST API call from for instance PowerShell.
 
-By using the solution from the command prompt is allows Application DevOps teams to integrate this into their CICD pipelines and only having to worry about the required IP addresses.
+By using the solution from the command prompt it allows Application DevOps teams to integrate this into their CICD pipelines and only having to worry about the required IP addresses.
 
 Below PowerShell script is an example on how you can use the solution from the PowerShell command prompt.
 
