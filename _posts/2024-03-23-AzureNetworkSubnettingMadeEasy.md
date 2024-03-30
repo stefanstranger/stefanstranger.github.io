@@ -38,10 +38,10 @@ There is an online version available at: <a href="https://azure-subnet-copilot.v
 
 ![Animated gif of website with Azure Subnet Copilot input and output being shown](/assets/2024-03-23-01.gif)
 
-The solutions requires the following information to be provided:
+The solution requires the following information to be provided:
 
 - Virtual Network IP range (in CIDR format)
-- Existing Subnet IP ranges (in CIDR format) separated by comma's (or leave empty if no subnet are deployed)
+- Existing Subnet IP rages (in CIDR format) separated by comma's (or leave empty if no subnet are deployed)
 - Number of required IP addresses
 
 ## Usage scenario's
