@@ -43,26 +43,7 @@ LLM Agents can analyze vast amounts of data, extracting key insights and present
 
 ### Key Components of an LLM Agent
 
-```mermaid
-graph TD;
-    A[User Input] --> B[LLM Processing];
-    B --> C[Context Understanding];
-    B --> D[Reasoning Module];
-    D --> E[Action Planning];
-    E --> F[Tool Selection];
-    F --> G[Action Execution];
-    G --> H[Response Generation];
-    H --> A;
-
-    subgraph Tools;
-        F1[API Interaction];
-        F2[Database Query];
-        F3[Web Search];
-        F4[Custom Functions];
-    end;
-
-    F -->|uses| Tools;
-
+![LLM Key Components Diagram](/assets/llm-agents-demo.png)
 
 ### Explanation of Components:
 
@@ -109,16 +90,7 @@ In this demo we are going to build a LLM Agent that can provide restaurant recom
 
 ### Example LLM Agent scenario
 
-```mermaid
-graph TD;
-    A["User Input: Can you recommend a good Italian restaurant nearby?"] --> B[Context Understanding]
-    B --> C[Function Call to Geolocation Service]
-    C --> D[Retrieve User Location]
-    D --> E[Function Call to Restaurant API]
-    E --> F[Fetch Italian Restaurants Data]
-    F --> G[Response Generation]
-    G --> H["User Output: I found three great Italian restaurants nearby: Luigi's, Pasta Palace, and Bella Italia. Would you like to see more details?"]
-```
+![Animated gif](/assets/llm-agents-blogpost.png)
 
 ### Diagram Explanation:
 
