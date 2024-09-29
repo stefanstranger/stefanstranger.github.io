@@ -9,9 +9,6 @@
     <!-- Enable responsiveness on mobile devices-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Mermaid support-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js"></script>
-
     <title>
       {% if page.title %} {{ page.title | strip_html }} &#8211; {% endif %} {{
       site.title | strip_html }}
@@ -202,26 +199,13 @@
 
     <!-- Google Analytics-->
     {% include analytics.html %}
+    <!-- Google Analytics -end -->
 
-    <!-- Mermaid support-->
-    <pre><code class="language-mermaid">graph LR
-        A--&gt;B
-        </code></pre>
-
-    <div class="mermaid">graph LR A--&gt;B</div>
-  </body>
-
-    <!-- Mermaid support-->
-  <script>
-    var config = {
-        startOnLoad:true,
-        theme: 'forest',
-        flowchart:{
-                useMaxWidth:false,
-                htmlLabels:true
-            }
-    };
-    mermaid.initialize(config);
-    window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+    <!-- Mermaid.js start-->
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true });
     </script>
+    <!-- Mermaid.js start-->
+  </body>
 </html>
