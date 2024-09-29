@@ -62,7 +62,6 @@ graph TD;
     end
 
     F -->|uses| Tools
-```
 
 ### Explanation of Components:
 
