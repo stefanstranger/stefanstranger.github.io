@@ -45,24 +45,24 @@ LLM Agents can analyze vast amounts of data, extracting key insights and present
 
 ```mermaid
 graph TD;
-    A[User Input] --> B[LLM Processing]
-    B --> C[Context Understanding]
-    B --> D[Reasoning Module]
-    D --> E[Action Planning]
-    E --> F[Tool Selection]
-    F --> G[Action Execution]
-    G --> H[Response Generation]
-    H --> A
+    A[User Input] --> B[LLM Processing];
+    B --> C[Context Understanding];
+    B --> D[Reasoning Module];
+    D --> E[Action Planning];
+    E --> F[Tool Selection];
+    F --> G[Action Execution];
+    G --> H[Response Generation];
+    H --> A;
 
-    subgraph Tools
-        F1[API Interaction]
-        F2[Database Query]
-        F3[Web Search]
-        F4[Custom Functions]
-    end
+    subgraph Tools;
+        F1[API Interaction];
+        F2[Database Query];
+        F3[Web Search];
+        F4[Custom Functions];
+    end;
 
-    F -->|uses| Tools
-```
+    F -->|uses| Tools;
+
 
 ### Explanation of Components:
 
