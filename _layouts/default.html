@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html>
+  <!-- Header: begin -->
 
-<!-- Header: begin -->
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Enable responsiveness on mobile devices-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Mermaid support-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js"></script>
 
     <title>
-        {% if page.title %}
-        {{ page.title | strip_html }} &#8211;
-        {% endif %}
-        {{ site.title | strip_html }}
+      {% if page.title %} {{ page.title | strip_html }} &#8211; {% endif %} {{
+      site.title | strip_html }}
     </title>
 
     <!-- Meta information for search engines -->
-    <meta name="author" content="{{ owner.name }}">
-    <meta name="description"
-        content="{% if page.summary %}{{ page.summary | xml_escape }}{% else %}{{ site.description | xml_escape }}{% endif %}">
+    <meta name="author" content="{{ owner.name }}" />
+    <meta
+      name="description"
+      content="{% if page.summary %}{{ page.summary | xml_escape }}{% else %}{{ site.description | xml_escape }}{% endif %}"
+    />
     {% if page.categories %}
-    <meta name="keywords" content="{{ page.categories | join: ', ' }}">
+    <meta name="keywords" content="{{ page.categories | join: ', ' }}" />
     {% endif %}
 
     <!-- Twitter Cards -->
@@ -30,32 +32,57 @@
     {% if site.owner.twitter %}
     <meta name="twitter:creator" content="@{{ site.owner.twitter }}" />
     {% endif %}
-    <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
-    <meta name="twitter:description"
-        content="{% if page.summary %}{{ page.summary | strip_html }}{% elsif page.excerpt %}{{ page.excerpt  | strip_html }}{% else %}{{ site.description | strip_html }}{% endif %}" />
+    <meta
+      name="twitter:title"
+      content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}"
+    />
+    <meta
+      name="twitter:description"
+      content="{% if page.summary %}{{ page.summary | strip_html }}{% elsif page.excerpt %}{{ page.excerpt  | strip_html }}{% else %}{{ site.description | strip_html }}{% endif %}"
+    />
     <meta name="twitter:url" content="{{ site.url }}{{ page.url }}" />
 
     <!-- Open Graph -->
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
-    <meta property="og:description"
-        content="{% if page.summary %}{{ page.summary | strip_html }}{% elsif page.excerpt %}{{ page.excerpt  | strip_html }}{% else %}{{ site.description | strip_html }}{% endif %}" />
+    <meta
+      property="og:title"
+      content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}"
+    />
+    <meta
+      property="og:description"
+      content="{% if page.summary %}{{ page.summary | strip_html }}{% elsif page.excerpt %}{{ page.excerpt  | strip_html }}{% else %}{{ site.description | strip_html }}{% endif %}"
+    />
     <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
-    <meta property="og:site_name" content="{{ site.title | strip_html | xml_escape }}">
+    <meta
+      property="og:site_name"
+      content="{{ site.title | strip_html | xml_escape }}"
+    />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/trio.css">
+    <link rel="stylesheet" href="/css/trio.css" />
 
     <!-- Social buttons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+      crossorigin="anonymous"
+    />
 
     <!-- Set the canonical URL for search engines -->
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.url }}">
+    <link
+      rel="canonical"
+      href="{{ page.url | replace:'index.html','' | prepend: site.url }}"
+    />
 
     <!-- RSS -->
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed for {{ site.title }}" href="/feed.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS Feed for {{ site.title }}"
+      href="/feed.xml"
+    />
 
     <!-- Icons -->
 
@@ -63,103 +90,138 @@
 
     <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
-    <link rel="manifest" href="/assets/images/site.webmanifest">
-    <link rel="shortcut icon" href="/assets/images/favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/assets/images/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/assets/images/site.webmanifest" />
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta
+      name="msapplication-config"
+      content="/assets/images/browserconfig.xml"
+    />
+    <meta name="theme-color" content="#ffffff" />
 
     <!-- end custom head snippets -->
-</head>
-<!-- Header: end -->
+  </head>
+  <!-- Header: end -->
 
-<body>
+  <body>
     <div class="wrapper-for-content-outside-of-footer">
-        <div class="site-title">
-            <a href="/">{{ site.title }}</a>
-        </div>
-        <div class="container">
-            {{ content }}
-        </div>
+      <div class="site-title">
+        <a href="/">{{ site.title }}</a>
+      </div>
+      <div class="container">{{ content }}</div>
     </div>
-
 
     <!-- Some empty space between the page counter and footer -->
-    <div>
-        <br /><br /><br /><br />
-    </div>
-
+    <div><br /><br /><br /><br /></div>
 
     <!-- Footer: begin -->
     <footer class="stickyfooter" role="contentinfo">
-        <div class="footer-logo">
-            <a href="/"><i class="fa fa-{{ site.fort_awesome_icon }}"></i></a>
-        </div>
+      <div class="footer-logo">
+        <a href="/"><i class="fa fa-{{ site.fort_awesome_icon }}"></i></a>
+      </div>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/search/">Search</a></li>
+      </ul>
+
+      <div class="footer-secondary-links">
         <ul>
-            <li><a href="/about/">About</a></li>
-            <li><a href="/contact/">Contact</a></li>
-            <li><a href="/search/">Search</a></li>
+          <li>
+            Powered by <a href="https://jekyllrb.com/">Jekyll</a> using the
+            <a href="https://www.perfectlyrandom.org/trio">Trio</a> theme
+          </li>
         </ul>
 
-        <div class="footer-secondary-links">
-            <ul>
-                <li>Powered by <a href="https://jekyllrb.com/">Jekyll</a>
-                    using the <a href="https://www.perfectlyrandom.org/trio">Trio</a> theme
-                </li>
-            </ul>
-
-            <ul class="footer-social">
-                <li><a href="/feed.xml">
-                        <i class="fa fa-rss-square"></i>
-                    </a></li>
-                {% if site.owner.github %}
-                <li><a href="https://github.com/{{ site.owner.github }}">
-                        <i class="fab fa-github-square"></i>
-                    </a></li>
-                {% endif %}
-
-                {% if site.owner.twitter %}
-                <li><a href="https://twitter.com/{{ site.owner.twitter }}">
-                        <i class="fab fa-twitter-square"></i>
-                    </a></li>
-                {% endif %}
-
-                {% if site.owner.linkedin %}
-                <li><a href="https://linkedin.com/in/{{ site.owner.linkedin }}">
-                        <i class="fab fa-linkedin"></i>
-                    </a></li>
-                {% endif %}
-
-                {% if site.owner.google_plus %}
-                <li><a href="https://plus.google.com/+{{ site.owner.google_plus }}">
-                        <i class="fab fa-google-plus-square"></i>
-                    </a></li>
-                {% endif %}
-
-                {% if site.owner.facebook %}
-                <li><a href="https://facebook.com/{{ site.owner.facebook }}">
-                        <i class="fab fa-facebook-square"></i>
-                    </a></li>
-                {% endif %}
-
-                {% if site.owner.youtube %}
-                <li><a href="https://youtube.com/{{ site.owner.youtube }}">
-                        <i class="fab fa-youtube-square"></i>
-                    </a></li>
-                {% endif %}
-            </ul>
-        </div>
-        <!-- This removes the small sliver of whitespace at the end of the page -->
-        <br />
+        <ul class="footer-social">
+          <li>
+            <a href="/feed.xml">
+              <i class="fa fa-rss-square"></i>
+            </a>
+          </li>
+          {% if site.owner.github %}
+          <li>
+            <a href="https://github.com/{{ site.owner.github }}">
+              <i class="fab fa-github-square"></i>
+            </a>
+          </li>
+          {% endif %} {% if site.owner.twitter %}
+          <li>
+            <a href="https://twitter.com/{{ site.owner.twitter }}">
+              <i class="fab fa-twitter-square"></i>
+            </a>
+          </li>
+          {% endif %} {% if site.owner.linkedin %}
+          <li>
+            <a href="https://linkedin.com/in/{{ site.owner.linkedin }}">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+          {% endif %} {% if site.owner.google_plus %}
+          <li>
+            <a href="https://plus.google.com/+{{ site.owner.google_plus }}">
+              <i class="fab fa-google-plus-square"></i>
+            </a>
+          </li>
+          {% endif %} {% if site.owner.facebook %}
+          <li>
+            <a href="https://facebook.com/{{ site.owner.facebook }}">
+              <i class="fab fa-facebook-square"></i>
+            </a>
+          </li>
+          {% endif %} {% if site.owner.youtube %}
+          <li>
+            <a href="https://youtube.com/{{ site.owner.youtube }}">
+              <i class="fab fa-youtube-square"></i>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <!-- This removes the small sliver of whitespace at the end of the page -->
+      <br />
     </footer>
     <!-- Footer: end -->
 
     <!-- Google Analytics-->
     {% include analytics.html %}
 
-</body>
+    <!-- Mermaid support-->
+    <pre><code class="language-mermaid">graph LR
+        A--&gt;B
+        </code></pre>
 
+    <div class="mermaid">graph LR A--&gt;B</div>
+  </body>
+
+    <!-- Mermaid support-->
+  <script>
+    var config = {
+        startOnLoad:true,
+        theme: 'forest',
+        flowchart:{
+                useMaxWidth:false,
+                htmlLabels:true
+            }
+    };
+    mermaid.initialize(config);
+    window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+    </script>
 </html>
