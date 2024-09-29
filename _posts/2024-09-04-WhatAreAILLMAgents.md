@@ -8,7 +8,7 @@ comments: true
 
 ## Introducing AI LLM Agents: The Future of Intelligent Automation
 
-After watching Doug Finke's YouTube video called ["Build Autonomous Agents in PowerShell with PSAI Agent | Real-Time Data Integration"](https://youtu.be/Oluxxm5Px4Y?si=6WJ5BaPYUb6SpujE) I got interested in the topic of Large Language Model (LLM) Agents. Especially the topic about [Function Calls](https://microsoft.github.io/autogen/docs/topics/openai-assistant/gpt_assistant_agent#function-calling) got me excited to learn more.
+After watching Doug Finke's YouTube video called ["Build Autonomous Agents in PowerShell with PSAI Agent Real-Time Data Integration"](https://youtu.be/Oluxxm5Px4Y?si=6WJ5BaPYUb6SpujE) I got interested in the topic of Large Language Model (LLM) Agents. Especially the topic about [Function Calls](https://microsoft.github.io/autogen/docs/topics/openai-assistant/gpt_assistant_agent#function-calling) got me excited to learn more.
 
 In this blog post, I will explore what LLM Agents are, their functionality and demo them using one of the LLM Agent frameworks called [AutoGen](https://microsoft.github.io/autogen/).
 
