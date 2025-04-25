@@ -5,8 +5,7 @@ categories: [AI, Bikes, Development]
 tags: [VanMoof, MCP, ModelContextProtocol, AI, Development]
 ---
 
-# Revolutionize Your VanMoof Experience: Connecting AI Agents with MCP Server
-
+# Introduction
 Imagine having your AI assistant provide real-time insights about your VanMoof bike rides. With the new VanMoof MCP Server, this is now a reality. In this blog post, I'll walk you through how the VanMoof MCP Server bridges the gap between your AI assistant and your VanMoof bike, allowing you to access bike details and riding stats effortlessly.
 
 ## Unlock the Power of AI with VanMoof MCP Server
