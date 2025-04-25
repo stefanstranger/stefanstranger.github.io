@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Revolutionize Your VanMoof Experience: Connecting AI Agents with MCP Server
+title: Revolutionize Your VanMoof Experience with the VanMoof MCP Server
 categories: [AI, Bikes, Development]
 tags: [VanMoof, MCP, ModelContextProtocol, AI, Development]
 ---
