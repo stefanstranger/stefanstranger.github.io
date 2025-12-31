@@ -6,6 +6,31 @@ tags: [AI, Coding, Github Copilot]
 comments: true
 ---
 
+- [Introduction](#introduction)
+- [Why use Skills?](#why-use-skills)
+- [Github Copilot and Agent Skills](#github-copilot-and-agent-skills)
+- [Getting Started with Agent Skills](#getting-started-with-agent-skills)
+  - [1. Create a Skills Directory](#1-create-a-skills-directory)
+  - [2. Create a Subdirectory for Each Skill](#2-create-a-subdirectory-for-each-skill)
+  - [3. Create a SKILL.md File](#3-create-a-skillmd-file)
+  - [4. Add Resources (Optional)](#4-add-resources-optional)
+- [Example SKILL.md File](#example-skillmd-file)
+- [Helper Scripts Reference](#helper-scripts-reference)
+  - [scripts/check\_uv.py](#scriptscheck_uvpy)
+  - [scripts/setup\_project.ps1](#scriptssetup_projectps1)
+  - [scripts/create\_pyproject.py](#scriptscreate_pyprojectpy)
+- [Why This Matters](#why-this-matters)
+- [How Copilot Uses Skills](#how-copilot-uses-skills)
+- [Using This Skill in Your Repository](#using-this-skill-in-your-repository)
+  - [1. Add the Skill to Your Repository](#1-add-the-skill-to-your-repository)
+  - [2. Example Prompts That Will Trigger This Skill](#2-example-prompts-that-will-trigger-this-skill)
+  - [3. How Copilot Decides to Use This Skill](#3-how-copilot-decides-to-use-this-skill)
+  - [4. What Happens When the Skill is Triggered](#4-what-happens-when-the-skill-is-triggered)
+- [Availability](#availability)
+- [Skills vs. Custom Instructions](#skills-vs-custom-instructions)
+- [Finding Skills](#finding-skills)
+- [Reference](#reference)
+
 ## Introduction
 
 In October 2025, Anthropic announced Agent Skills. As Agents become more powerfull, the wanted a more composable, scalable, and portable way to equip these agent with domain specific expertise.
