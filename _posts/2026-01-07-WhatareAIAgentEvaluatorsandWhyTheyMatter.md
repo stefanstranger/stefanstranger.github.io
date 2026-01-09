@@ -198,7 +198,7 @@ Finally, we parse the evaluation results. The evaluator returns a score (1-5) an
 
 <a href="https://stefanstranger.github.io//assets//07-01-2026-02.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="https://stefanstranger.github.io//assets//07-01-2026-02.png" border="0" /></a>
 
-07-01-2026-03.png<a href="https://stefanstranger.github.io//assets//07-01-2026-03.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="https://stefanstranger.github.io//assets//07-01-2026-023.png" border="0" /></a>
+07-01-2026-03.png<a href="https://stefanstranger.github.io//assets//07-01-2026-03.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="https://stefanstranger.github.io//assets//07-01-2026-03.png" border="0" /></a>
 
 ## Conclusion
 
