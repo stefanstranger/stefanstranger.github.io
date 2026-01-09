@@ -198,13 +198,38 @@ Finally, we parse the evaluation results. The evaluator returns a score (1-5) an
 
 <a href="https://stefanstranger.github.io//assets//07-01-2026-02.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="https://stefanstranger.github.io//assets//07-01-2026-02.png" border="0" /></a>
 
-07-01-2026-03.png<a href="https://stefanstranger.github.io//assets//07-01-2026-03.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="https://stefanstranger.github.io//assets//07-01-2026-02.png" border="0" /></a>
+07-01-2026-03.png<a href="https://stefanstranger.github.io//assets//07-01-2026-03.png"><img width="540" height="1170" title="image" style="padding-top: 0px;padding-left: 0px;margin: 0px;padding-right: 0px;border-width: 0px" alt="image" src="https://stefanstranger.github.io//assets//07-01-2026-023.png" border="0" /></a>
 
 ## Conclusion
 
 By implementing this `SimilarityEvaluator`, we moved from 'feeling' that our agent is working to 'knowing' it is working based on quantifiable metrics. This is the first step towards building robust, production-ready Agentic AI systems.
 
 In the next blog post, I'll explore how to use evaluators as a feedback loop to **improve prompt instructions**. I also plan to investigate how we can use these metrics to **compare different agent architectures**—testing whether complex workflows or tool-enabled agents actually deliver better results than simpler implementations.
+
+
+As fun exercise you can also try to change the prompt to see if the tests will pass.
+
+```python
+    instructions = """You are being evaluated on your ability to answer questions accurately and follow instructions precisely.
+
+                    CRITICAL for letter/character counting questions:
+                    - These are difficult for AI models due to tokenization
+                    - ALWAYS spell out the word letter-by-letter with separators (e.g., M-e-r-c-e-d-e-s)
+                    - Count each occurrence carefully
+                    - Verify your count twice
+                    - Provide only the final number
+
+                    For other questions:
+                    - Provide direct, concise answers without preambles
+                    - Match the requested format exactly
+                    - Be precise and literal
+
+                    Examples:
+                    - Question: "How many 'e's in 'Mercedes-Benz'?" → Answer: "4"
+                    - Question: "Spell 'cat' backwards" → Answer: "tac"
+
+                    Provide only the final answer in your response."""
+```
 
 Let me know iņ the comments how you are using evaluations.
 
