@@ -37,8 +37,16 @@ owner:
     youtube:
 
 
-# Disqus comments configuration (leave blank to disable comments)
-disqus_shortname: 'stefanstranger'
+# Giscus comments configuration (https://giscus.app)
+giscus:
+  repo: "stefanstranger/stefanstranger.github.io"
+  repo_id: "MDEwOlJlcG9zaXRvcnkxNTEyMjg0MjE="
+  category: "Announcements"
+  category_id: "DIC_kwDOCQOQBc4C384E" # TODO: Fill in after enabling Discussions (get from https://giscus.app)
+  mapping: "pathname"
+  reactions_enabled: "1"
+  theme: "preferred_color_scheme"
+  lang: "en"
 
 # Jekyll configuration
 permalink: /:year/:month/:day/:title/
