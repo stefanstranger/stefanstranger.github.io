@@ -43,7 +43,7 @@ analytics:
 theme_mode:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://github.com/stefanstranger.png
 
 # boolean type, the global switch for TOC in posts.
 toc: true
@@ -127,6 +127,7 @@ compress_html:
 
 plugins:
   - jemoji
+  - jekyll-archives
 
 include:
   - .well-known
@@ -141,6 +142,7 @@ exclude:
   - purgecss.js
   - "*.config.js"
   - "package*.json"
+  - assets/
 
 jekyll-archives:
   enabled: [categories, tags]
