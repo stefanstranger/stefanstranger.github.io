@@ -1,0 +1,13 @@
+{
+  "name": "Jekyll Chirpy",
+  "image": "mcr.microsoft.com/devcontainers/ruby:3.3",
+  "postCreateCommand": "bundle install",
+  "forwardPorts": [4000],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "shopify.ruby-lsp"
+      ]
+    }
+  }
+}
