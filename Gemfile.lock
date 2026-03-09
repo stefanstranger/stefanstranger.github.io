@@ -236,6 +236,7 @@ PLATFORMS
 
 DEPENDENCIES
   html-proofer (~> 5.0)
+  jekyll (~> 4.4.0)
   jekyll-theme-chirpy (~> 7.4, >= 7.4.1)
   jemoji
   tzinfo (>= 1, < 3)
