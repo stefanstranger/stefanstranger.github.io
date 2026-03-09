@@ -1,8 +1,6 @@
 _site
 .sass-cache
 .jekyll-metadata
-Gemfile.lock
 *.bak
-Gemfile.lock
 *.code-workspace
 .vscode/settings.json
