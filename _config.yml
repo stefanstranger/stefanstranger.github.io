@@ -1,76 +1,152 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+# The Site Configuration
+# Import the theme
+theme: jekyll-theme-chirpy
 
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# The language of the webpage
+lang: en
+
+# Change to your timezone
+timezone: Europe/Amsterdam
+
+# jekyll-seo-tag settings
 title: Stefan Stranger's Blog
-description: >- # this means to ignore newlines until "baseurl:"
-  This is my personal blog. I work at Microsoft as a Consultant. 
+
+tagline: AI, Azure, PowerShell and DevOps
+
+description: >-
+  This is my personal blog. I work at Microsoft as a Consultant.
   You can find some of my open source projects on Github.
-  I like to share my knowledge about Azure, PowerShell and DevOps
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://stefanstranger.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: sstranger
-github_username:  stefanstranger
+  I like to share my knowledge about AI, Azure, PowerShell and DevOps
 
-# Owner configuration
-# name and email are required (change code to remove these)
-# (leave the rest blank to disable the corresponding sharing button)
-owner:
-    name: Stefan Stranger
-    email: stefan@stranger.nl
-    github: stefanstranger
-    twitter: sstranger
-    linkedin: stefanstranger
-    facebook:
-    google_plus:
-    youtube:
+url: "https://stefanstranger.github.io"
 
+github:
+  username: stefanstranger
 
-# Giscus comments configuration (https://giscus.app)
-giscus:
-  repo: "stefanstranger/stefanstranger.github.io"
-  repo_id: "MDEwOlJlcG9zaXRvcnkxNTEyMjg0MjE="
-  category: "Announcements"
-  category_id: "DIC_kwDOCQOQBc4C384E" # TODO: Fill in after enabling Discussions (get from https://giscus.app)
-  mapping: "pathname"
-  reactions_enabled: "1"
-  theme: "preferred_color_scheme"
-  lang: "en"
+twitter:
+  username: sstranger
 
-# Jekyll configuration
-permalink: /:year/:month/:day/:title/
-#paginate: 8
+social:
+  name: Stefan Stranger
+  email: stefan@stranger.nl
+  links:
+    - https://twitter.com/sstranger
+    - https://github.com/stefanstranger
+    - https://www.linkedin.com/in/stefanstranger
 
-# Build settings
-markdown: kramdown
-theme: minima
+# Web Analytics Settings
+analytics:
+  google:
+    id: # fill in your Google Analytics ID
+
+# Prefer color scheme setting (empty = follow system + toggle)
+theme_mode:
+
+# the avatar on sidebar, support local or CORS resources
+avatar:
+
+# boolean type, the global switch for TOC in posts.
+toc: true
+
+comments:
+  provider: giscus
+  giscus:
+    repo: "stefanstranger/stefanstranger.github.io"
+    repo_id: "MDEwOlJlcG9zaXRvcnkxNTEyMjg0MjE="
+    category: "Announcements"
+    category_id: "DIC_kwDOCQOQBc4C384E"
+    mapping: "pathname"
+    strict: "0"
+    input_position: "bottom"
+    lang: "en"
+    reactions_enabled: "1"
+
+assets:
+  self_host:
+    enabled: false
+
+pwa:
+  enabled: true
+  cache:
+    enabled: true
+
+paginate: 10
+
+# The base URL of your site
+baseurl: ""
+
+# ------------ The following options are not recommended to be modified ------------------
+
+kramdown:
+  footnote_backlink: "&#8617;&#xfe0e;"
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+collections:
+  tabs:
+    output: true
+    sort_by: order
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: true
+      toc: true
+      permalink: /:year/:month/:day/:title/
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ""
+      type: tabs
+    values:
+      layout: page
+      permalink: /:title/
+
+sass:
+  style: compressed
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
+
 plugins:
-  - jekyll-feed
-  - jekyll-sitemap
   - jemoji
 
-# Include
-include: [".well-known"]
+include:
+  - .well-known
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - docs
+  - tools
+  - README.md
+  - LICENSE
+  - purgecss.js
+  - "*.config.js"
+  - "package*.json"
+
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/
