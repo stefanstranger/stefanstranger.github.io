@@ -6,7 +6,6 @@ gem "jekyll", "~> 4.4.0"
 gem "jekyll-theme-chirpy", "~> 7.4", ">= 7.4.1"
 
 group :jekyll_plugins do
-  gem "github-pages"
   gem "jemoji"
 end
 
