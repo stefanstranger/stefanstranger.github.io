@@ -8,7 +8,7 @@ comments: true
 
 ## Introduction
 
-I was at AgentCon Utrecht yesterday. [Eduard van Valkenburg](https://www.linkedin.com/in/eavanvalkenburg/) from the Senior Software Engineer at Microsoft - CoreAI and Semantic Kernel & Agent Framework team demoed the Microsoft Agent Framework v1.0, and the Harness Agent pattern was the thing that stuck with me most on the drive home.
+I was at AgentCon Utrecht yesterday. [Eduard van Valkenburg](https://www.linkedin.com/in/eavanvalkenburg/) a Senior Software Engineer at Microsoft - CoreAI and Semantic Kernel & Agent Framework team demoed the Microsoft Agent Framework v1.0, and the Harness Agent pattern was the thing that stuck with me most on the drive home.
 
 I've been building agentic solutions for a while now, from CrewAI investment analysis workflows to MCP servers for Azure Verified Modules. Each time, I end up solving the same problems from scratch: context window management, tool approval flows, planning state, todo tracking. The [Harness Agent](https://devblogs.microsoft.com/agent-framework/agent-harness-in-agent-framework/) is Microsoft's answer to that, it is the layer where model reasoning connects to real execution: shell and filesystem access, approval flows, and context management across long-running sessions.
 
