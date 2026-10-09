@@ -8,27 +8,36 @@ published: false
 ---
 ## Introduction
 
-When I wrote about [agent harnesses](/2026/06/26/BuildingAnHarnessAgentWithMicrosoftAgentFramework/), the focus was on the infrastructure around a model. AI decision models made me look at a smaller part of that picture: what if I only need a judgment at one specific point in the workflow?
+When I wrote about [agent harnesses](/2026/06/26/BuildingAnHarnessAgentWithMicrosoftAgentFramework/), I focused on the infrastructure around a model.
 
-Take support tickets. I can write the routing workflow in PowerShell, but deciding which team should receive a message gets awkward when the customer describes several problems at once. That is the part where I would want help from a model.
+Decision models made me look at one smaller question: what if I need AI judgment at only one point in a workflow?
 
-Thinking about it as one call inside a PowerShell function made decision models easier for me to understand. I could ask which team should handle the ticket, check the answer, and continue with the script I already know how to write.
+Take support tickets. PowerShell can route a ticket, but deciding which team should receive an ambiguous message is harder to express as fixed rules.
+
+I could ask a decision model to classify the message, validate its answer, and let PowerShell continue the workflow.
+
+The terminal test exposed an even more useful boundary. Neither script routed the ticket, yet both generated replies claimed that routing had happened.
+
+That is the argument of this post: a model can make a judgment, but code must own the action. Generated prose should describe only actions the application actually recorded.
 
 ## TL;DR
 
-* A decision model can select a team from a list you define. Your code checks the answer and decides whether to route the ticket or ask a person to review it.
-* A regular LLM can do this too, including returning structured JSON. I want to compare how well each handles the job and what it costs to run.
-* Jev is TypeSafe's flagship System One model. For the local experiment, I used Laya through Unsloth Studio's compatible Decision API.
-* A valid team label can still be wrong. The probabilities and review threshold need testing on tickets representative of the actual workflow.
+* Laya returned typed decisions for team, refund intent, and urgency.
+* A regular LLM classified the same ticket and drafted a reply.
+* GitHub Copilot used Laya's results to draft another reply.
+* Both replies invented a routing action that the scripts never performed.
+* Typed output constrains an interface. It does not prove correctness or make later prose truthful.
 
 > [!NOTE]
-> The terminal results below are from initial runs with Laya, GitHub Copilot CLI, and local Gemma. They show the workflows running, not a controlled benchmark. Both generated replies also claimed a routing action that the scripts never performed.
+> These are initial workflow demonstrations, not a controlled benchmark. The models, runtimes, and request paths differ, and the test uses one synthetic ticket.
 
 ## What is an AI decision model
 
-[TypeSafe describes System One](https://docs.typesafe.ai/concepts/system-one) as models for bounded, structured decisions. You supply the application state and typed questions. The model returns answers and probabilities rather than a generated explanation.
+[TypeSafe describes System One](https://docs.typesafe.ai/concepts/system-one) models as tools for bounded, structured decisions.
 
-In the ticket example, "state" means the customer's message. I supply the list of teams and ask the model to choose one.
+The application supplies state and typed questions. The model returns answers and probabilities instead of a generated explanation.
+
+In this example, the state is the customer's message. I provide the available teams and ask the model to choose one.
 
 The interface supports different kinds of questions:
 
@@ -38,19 +47,19 @@ The interface supports different kinds of questions:
 | `noul`      | Assess a yes/no question              | Does this message ask for help? |
 | `score`     | Rate against a defined ordered scale  | How urgent is this request?     |
 
-A `choice` question returns a selected option and option probabilities. A `noul` question provides the probability of yes. A `score` question provides a score and associated probability information.
+A `choice` question returns an option and its probability distribution.
 
-I still have to decide what my application is allowed to do with the answer. Selecting `billing`, for example, should send the ticket to a queue. It shouldn't give the model permission to issue a refund!
+The API calls its yes/no question type `noul`; it returns the probability of yes. A `score` question returns a position on an ordered scale and probability information.
+
+My application still decides what to do with those answers. Selecting `billing` may route a ticket to a queue. It must not give the model permission to issue a refund.
 
 ### System One, Jev, and Laya
 
-[Jev](https://docs.typesafe.ai/models) is TypeSafe's flagship System One model, available through its hosted API. [Laya](https://huggingface.co/convaiinnovations/laya) is a local decision-model option. [Unsloth Studio documents how to serve Laya](https://unsloth.ai/docs/models/decision-laya) through a Jev-compatible Decision API.
+[Jev](https://docs.typesafe.ai/models) is TypeSafe's hosted System One model. [Laya](https://huggingface.co/convaiinnovations/laya) is a local alternative.
 
-The hosted TypeSafe endpoint is `POST https://api.typesafe.ai/v1/systemone`. Unsloth's local Decision API also uses the `/v1/systemone` route.
+[Unsloth Studio can serve Laya](https://unsloth.ai/docs/models/decision-laya) through a Jev-compatible `/v1/systemone` API.
 
-One detail to watch: Jev and Laya calculate confidence differently, despite the compatible interface. I would need to retest a confidence threshold when switching between them.
-
-For more on Jev and agent architecture, there is [The ClawCast, Episode 12, &#34;Jev and OpenClaw Enterprise&#34;](https://www.youtube.com/watch?v=ufLTkFzgw2k). It covers the approach discussed here, though I haven't independently tested its product claims.
+The compatible interface does not imply identical behavior. Jev and Laya calculate confidence differently, so a threshold tuned for one cannot be copied safely to the other.
 
 ## Why not use a PowerShell switch or a regular LLM
 
@@ -62,7 +71,7 @@ But what should the script do with this?
 
 Is this sales because the customer wants to upgrade? Technical support because checkout crashes? Billing because their card was charged?
 
-A keyword-based script can match all three. I would need a policy for which issue takes priority, then a way to judge the message against that policy. This is where I want to try a decision model.
+A keyword script can match all three. I need a priority policy and a way to judge the message against it. This is where a decision model may help.
 
 Here is how I think about the options:
 
@@ -72,13 +81,13 @@ Here is how I think about the options:
 | Decision model | Bounded classification, routing, or tagging | A valid answer can still be the wrong answer |
 | Standard LLM   | Generation, explanation, and synthesis      | Validate output and evaluate task quality    |
 
-You might be thinking: I can already ask an LLM to return `{"team":"billing"}`. And you can. Depending on the model and server, you can also constrain that output with a schema.
+An LLM can also return `{"team":"billing"}`. Depending on the server, a schema can constrain that output.
 
-That gives me a useful baseline for the experiment. I want to find out whether the decision model gets the routing right, how long it takes, how much memory it uses, and whether its probabilities help me decide when to ask for review. The API documentation alone cannot answer those questions for my setup.
+The distinction is therefore not "JSON versus prose." It is whether a purpose-built decision interface, including its probabilities, is useful inside an application policy.
 
 ## Where this fits in an agent harness
 
-The [agent harness](/2026/06/26/BuildingAnHarnessAgentWithMicrosoftAgentFramework/) is one place I could put this check. The harness can call the decision model whenever a ticket arrives. An ordinary script could do the same; this doesn't require an agent.
+An [agent harness](/2026/06/26/BuildingAnHarnessAgentWithMicrosoftAgentFramework/) could require this check whenever a ticket arrives. An ordinary script can do the same; an agent is not required.
 
 For the ticket example, the flow could look like this:
 
@@ -88,28 +97,34 @@ For the ticket example, the flow could look like this:
 4. Route the ticket using ordinary code, or send it for human review.
 5. Use a standard LLM if a reply or explanation needs to be drafted.
 
-I would make step 2 a required call in the application, rather than leave it to the general-purpose LLM to decide whether to use that check.
+The application requires the decision call. It does not leave a general-purpose LLM to decide whether the check should happen.
 
-[MCP](https://modelcontextprotocol.io/specification/2025-11-25) could provide the connection to tools and context in this setup. It doesn't change the reliability of the model's judgment or replace the application's validation and authorization checks.
+## The local workflow
 
-## The local experiment I want to run
+I used Windows Terminal to demonstrate two paths:
 
-If you read my post about [the AI tools I use daily](/2026/08/14/AIToolsIUseDaily/), you probably won't be surprised that I want to try this in Windows Terminal. I'll compare Laya followed by an LLM with an LLM that classifies and replies in one request.
+1. Laya classifies the ticket, then GitHub Copilot drafts a reply from the decision results.
+2. A local Gemma model classifies the ticket and drafts a reply in one request.
+
+This demonstrates workflow shape, not relative model quality. A controlled comparison would use the same reply model, environment, inputs, and repeated runs.
 
 ### Before running the scripts
 
-You'll need PowerShell 7 and [Unsloth Studio](https://unsloth.ai/docs/new/studio/install). Start Studio with `unsloth studio -p 8888` and keep it running.
+The examples require PowerShell 7 and [Unsloth Studio](https://unsloth.ai/docs/new/studio/install). I started Studio with `unsloth studio -p 8888`.
 
 * Enable **Settings > API > Decision API > Serve requests** and load Laya.
 * Load a regular chat model and enable its OpenAI-compatible API.
 * Have your Studio API token ready, or enable localhost keyless inference.
 
-Both scripts below are complete. Paste one into each pane; neither depends on the other. Laya answers typed questions; the regular LLM classifies the same ticket and drafts a reply. The Copilot follow-up adds a reply to Laya's workflow.
+Each script is self-contained. Laya answers typed questions. Gemma classifies the same ticket and drafts a reply. A third block sends Laya's results to Copilot.
 
 The examples use Studio on port 8888. If your chat endpoint uses another port, change its URL. The [Unsloth API guide](https://unsloth.ai/docs/basics/api) explains the serving settings.
 
 > [!WARNING]
-> Keep both endpoints on loopback and disable server-side tools for this demo. Token entry is hidden, but the bearer header contains the token in memory. Don't print `$Headers` or include it in a recording.
+> Keep both endpoints on loopback and disable server-side tools. Token entry is hidden, but the bearer header exists in memory. Do not print `$Headers` or expose it in a recording.
+
+> [!CAUTION]
+> The Copilot step sends the ticket and decision results to an external service. Real tickets may contain personal, payment, or contract data. Use only an approved data path and apply your organization's redaction and retention policies.
 
 ### Split Windows Terminal
 
@@ -121,11 +136,11 @@ wt -w new --maximized new-tab --title "Laya | Decision Model" --suppressApplicat
 
 The escaped semicolon separates the Windows Terminal commands. `-V` creates a vertical divider, with the panes beside each other.
 
-Both panes are clients. Splitting the terminal does not require two separate model servers.
+Both panes are clients. The split does not imply separate model servers.
 
 ### Left pane - Laya decision model
 
-This is the direct REST call. The ticket goes into `state`; the three questions go into `questions`. The only setup at the prompt is your API token. Press Enter instead if localhost keyless inference is enabled.
+This REST call sends the ticket as `state` and asks three typed questions. Enter the API token, or press Enter if localhost keyless inference is enabled.
 
 ```powershell
 $ErrorActionPreference = 'Stop'
@@ -184,17 +199,17 @@ $Timer.Stop()
 } | ConvertTo-Json -Depth 10
 ```
 
-The output includes Laya's model, answers, probabilities, usage, and `elapsed_ms`. `$Response` keeps the full parsed API response available for inspection.
+The output includes the model, answers, probabilities, usage, and `elapsed_ms`. `$Response` retains the parsed API response.
 
 `laya` selects the decision model configured in Studio. Record the returned model name and the loaded checkpoint when comparing runs.
 
 ### Right pane - Regular LLM
 
-This script sends the customer's message directly to Unsloth's chat endpoint. Enter the exact chat model ID shown by Studio or its `GET /v1/models` endpoint, then your token.
+This script sends the message to Unsloth's chat endpoint. Enter the exact model ID shown by Studio or `GET /v1/models`, followed by the token.
 
 The LLM gets the same team definitions and priority rule as Laya. It briefly shows its classification, then drafts a customer-facing reply in the same request. The output is plain text, not JSON.
 
-Use a general-purpose instruct/chat model for this example. [Phi-4-mini-reasoning](https://huggingface.co/microsoft/Phi-4-mini-reasoning) is designed and tested for math reasoning, rather than customer-service conversations.
+Use a general-purpose instruct model. [Phi-4-mini-reasoning](https://huggingface.co/microsoft/Phi-4-mini-reasoning) is designed and tested for mathematical reasoning, not customer-service conversations.
 
 ```powershell
 $ErrorActionPreference = 'Stop'
@@ -263,41 +278,38 @@ $Reply
 "Elapsed: {0:N1} ms" -f $Timer.Elapsed.TotalMilliseconds
 ```
 
-The script prints the returned model, classification and reply, and elapsed time. `$Response` keeps the full API response, including usage data when supplied.
+The script prints the model, classification, reply, and elapsed time. `$Response` retains the full API response.
 
-If generation reaches a length limit, the script reports an error with the token count and elapsed time. It leaves `$Reply` empty rather than presenting partial output as a completed answer.
+> [!NOTE]
+> My first model choice, Phi-4-mini-reasoning, consumed all 1,024 output tokens inside `<think>` and never produced a final reply. Its model card targets mathematical reasoning, so I replaced it with Gemma.
 
-In my Phi-4-mini-reasoning run, the server returned `finish_reason: "length"` and `completion_tokens: 1024`. The output stopped inside `<think>`, before a final reply. That run belongs in the results as an incomplete response.
-
-To experiment with that reasoning model, increase `max_tokens` and allow a longer HTTP timeout if needed. More tokens may let it finish, but don't guarantee a useful reply. Removing the `<think>` text cannot recover an answer it never generated.
-
-The API reported zero `reasoning_tokens` even though reasoning text appeared in `message.content`. Those words still consumed the output-token budget. The reply itself is plain text; there is no classification JSON to parse.
+The script rejects length-limited output instead of presenting partial text as a completed reply.
 
 ### Reading the two results
 
-Laya returns a team choice, the probability that a refund was requested, and an urgency score with a legend and probabilities. These are values a script can use to decide what happens next.
+Laya returns a team choice, refund probability, and urgency score. These values can feed application policy.
 
-The regular LLM shows a brief classification and writes a reply in one request. It uses the same routing policy, but returns prose rather than Laya's typed answers and probabilities.
+Gemma classifies and replies in one request. It uses the same routing policy but returns prose rather than typed decisions.
 
-The complete workflows are Laya followed by a reply-generating LLM, and an LLM that classifies and replies on its own. Compare Laya's time plus the follow-up request with the single LLM request, not classification time alone.
+The complete paths are Laya plus a reply model, and one LLM doing both jobs. End-to-end timing for the first path must include both requests.
 
-For a controlled comparison, use the same reply-generating model in both workflows. The examples use Copilot after Laya and a local model on its own, so differences can also come from the response models and serving environments.
+The demonstration uses Copilot after Laya and local Gemma alone. Any difference may come from the model, hosting environment, network, or number of requests.
 
-Neither script routes a ticket or issues a refund. The LLM has no account access, so review its reply rather than treating any claim about a charge or refund as verified.
+Neither script routes a ticket or issues a refund. The LLM has no account access. Any claim that an action occurred is unsupported.
 
 To try the ambiguous case, replace `$Ticket` in both scripts with `"I can't upgrade my plan: checkout crashes and my card was charged."` Both models use the same routing priority; the regular LLM also drafts a reply.
 
-Both timers measure the HTTP call, response parsing, and completion checks. Token entry, request preparation, and output formatting are excluded. Laya prints `elapsed_ms`; the LLM prints `Elapsed` in milliseconds.
+Both timers cover the HTTP call, parsing, and completion checks. They exclude token entry, request construction, and output formatting.
 
-Run the requests one after the other when measuring latency. A first request may include model loading, so record cold and warm runs separately. Check whether both models can stay loaded before comparing repeated runs.
+Run requests sequentially when measuring latency. Record cold and warm runs separately, and verify whether both models remain loaded.
 
 ### Send the decision results to GitHub Copilot CLI
 
-To turn the classification into a reply, run this block in the same PowerShell pane after the Laya script. It reuses `$Ticket` and `$Response`. Don't run the regular LLM script in that pane first, since it overwrites `$Response`.
+Run this block in the same pane after Laya. It reuses `$Ticket` and `$Response`. Do not run the Gemma script there first because it overwrites `$Response`.
 
-You'll need GitHub CLI with `gh copilot` installed and authenticated. This sends the ticket and decision results to GitHub Copilot; this step is no longer local inference.
+This requires an authenticated GitHub CLI with `gh copilot`. It sends the ticket and decision results to GitHub Copilot, so this step is not local inference.
 
-The prompt explains the result fields without prescribing the reply. The UTF-8 settings prevent curly apostrophes from becoming garbled when PowerShell captures the CLI output.
+The prompt explains the fields without prescribing the reply. The UTF-8 settings prevent PowerShell from corrupting curly apostrophes in captured output.
 
 ```powershell
 $ErrorActionPreference = 'Stop'
@@ -344,13 +356,15 @@ $Reply -join "`n"
 "Elapsed: {0:N1} ms" -f $Timer.Elapsed.TotalMilliseconds
 ```
 
-This prints the reply directly, without `Format-List` indentation. The elapsed time includes CLI startup and the Copilot request, not the earlier Laya call. Review the generated reply before using it.
+The timer includes CLI startup and the Copilot request, but not Laya. Review the reply before using it.
 
 ## What came back in the terminal
 
-Here are the two reply-generation paths on screen. The upper-right pane shows the Copilot follow-up after Laya; the lower-left shows Gemma classifying the ticket and replying in one request. The other panes show server logs.
+Here are the outputs from the two reply paths.
 
-![Windows Terminal showing the Copilot follow-up reply, Gemma classification and reply, elapsed times, and local server logs](/assets/2026-10-09-01.png)
+![GitHub Copilot CLI reply generated from Laya's decision results](/assets/2026-10-09-02.png)
+
+![Gemma classification and customer reply from one local request](/assets/2026-10-09-03.png)
 
 ### Classification and replies
 
@@ -360,7 +374,7 @@ Gemma, running as `unsloth/gemma-4-12B-it-qat-GGUF`, returned:
 * Refund requested: yes
 * Urgency: today
 
-That agrees with the earlier Laya result for this ticket: `billing`, a refund-request probability of `0.9794`, and a probability of `0.9045` for the urgency level "today". Laya's urgency score was `1.9005` on the zero-to-two scale.
+This agrees with Laya: `billing`, refund probability `0.9794`, and probability `0.9045` for "today." Laya's urgency score was `1.9005` on a zero-to-two scale.
 
 The replies were different. Copilot wrote:
 
@@ -370,62 +384,82 @@ Gemma showed its classification first, then included this in the reply:
 
 > I have forwarded your request to our billing team to investigate the duplicate charge and process the refund for you as quickly as possible. We will notify you as soon as the refund has been completed.
 
-This is the bit I would stop at before sending either reply to a customer. Both say the ticket has been passed to billing. My scripts did no such thing. Gemma also talks about a refund as though processing it is already the next step.
+I would reject both drafts. Both say the ticket was sent to billing. The scripts did no such thing. Gemma also describes refund processing as though it had started.
 
-The Copilot prompt explained that classification does not mean an action was taken, but the reply still claimed routing. Passing structured results to an LLM does not guarantee that its prose will stay within those facts.
+Copilot received an explicit warning that classification does not indicate action. It still claimed routing. Structured context did not keep the generated prose within the recorded facts.
 
-For a real workflow, I would have code perform the authorized routing action and record the result before asking for a reply about it. Until then, these are drafts to review, not confirmations to send.
+In production, code should perform the authorized action and record its outcome. Only then should a reply model describe that outcome.
 
 ### Observed times
 
-The terminal uses Dutch number formatting: `14.552,5 ms` means 14,552.5 milliseconds.
+The terminal uses Dutch number formatting: `14.552,5 ms` means 14.6 seconds.
 
-| Request                              | Elapsed time | What the timer covers                       |
-|--------------------------------------|--------------|---------------------------------------------|
-| Copilot follow-up after Laya          | 14,552.5 ms  | CLI startup and reply request, excluding Laya |
-| Gemma classification and reply       | 73,687.1 ms  | Local chat request and response checks       |
+| Request                        | Observed time | What the timer covers                  |
+|--------------------------------|---------------|----------------------------------------|
+| Copilot follow-up after Laya   | 14.6 s        | CLI startup and reply, excluding Laya  |
+| Gemma classification and reply | 73.7 s        | Local chat request and response checks |
 
-The Copilot follow-up took about 14.6 seconds; Gemma took about 73.7 seconds. These are individual observations from different models and serving environments, not evidence that decision models are faster than chat models.
+These are single observations from different models and environments. They do not show that decision models are faster than chat models.
 
-The full Laya-to-Copilot path also includes the Laya request. Its client elapsed time is not shown in this screenshot. The earlier Laya output showed 1,828.6 ms, but that was a separate run, so I haven't combined them into one measured total.
+The Laya-to-Copilot path also includes Laya. A separate Laya run took 1.8 seconds, but I have not combined measurements from different runs into an end-to-end total.
 
-The server logs contain their own `process_time_ms` values. Those measure a different part of the request and should not replace the client timings. The screenshot also doesn't establish whether models were warm or whether other work was running.
+The server's `process_time_ms` measures a different boundary and cannot replace client timing.
 
-## What I still want to measure
+### Test environment and limitations
 
-A handful of tickets will help me check the requests and responses. To compare accuracy, I'll need a representative set of tickets with expected answers.
+| Detail                  | Recorded value                            |
+|-------------------------|-------------------------------------------|
+| Operating system        | Windows                                   |
+| Shell                   | PowerShell 7                              |
+| Decision serving        | Unsloth Studio, version not recorded      |
+| Decision model          | Laya multilingual, checkpoint not recorded |
+| Local reply model       | `unsloth/gemma-4-12B-it-qat-GGUF`         |
+| Copilot CLI version     | Not recorded                              |
+| CPU, GPU, RAM, and VRAM | Not recorded                              |
+| Warm-up state           | Not recorded                              |
+| Number of measured runs | One per displayed result                  |
+
+Those gaps prevent a reproducible performance comparison. The run shows that the workflows execute and exposes a grounding failure; it does not establish accuracy, cost, or latency rankings.
+
+## What I would measure next
+
+A representative labeled set is required to compare classification quality. Several hand-picked tickets only verify that the workflow runs.
 
 For measurements beyond this demonstration, I want to:
 
-* Warm up both models and measure cold starts separately.
-* Run timed requests sequentially so they do not compete for shared resources.
-* Measure end-to-end client latency, including parsing and validation.
-* Repeat requests and report median latency, plus tail latency with enough samples.
-* Give both models the same classification task and labeled test set if comparing classification accuracy.
-* Evaluate generated replies separately for usefulness and unsupported claims.
-* Report invalid outputs and errors instead of dropping failed requests.
-* Report review rate and accuracy among accepted cases when applying a review threshold.
-* Measure memory use before claiming a resource advantage.
+* Use the same classification task and labeled test set.
+* Use the same reply model in both complete workflows.
+* Separate cold starts from warm, sequential requests.
+* Report median and tail latency over repeated runs.
+* Record invalid outputs, review rate, and accepted-case accuracy.
+* Evaluate replies for usefulness and unsupported claims.
+* Measure memory before making resource claims.
 
-I'll record input length and chat generation settings alongside the hardware, server version, checkpoint, and quantization so the comparison can be repeated. A fixed temperature doesn't guarantee identical outputs. Model aliases such as `jev-latest` can also change, so a reproducible run needs a pinned version.
+A reproducible run also needs hardware, server version, checkpoint, quantization, input length, and generation settings. Model aliases can change, so the model version should be pinned.
 
 ## How much should I trust the probability
 
-[Unsloth&#39;s Laya guidance](https://unsloth.ai/docs/models/decision-laya) advises thresholding the selected choice's probability rather than its `confidence` field. In the response, look up the selected team under `answers.team.probabilities`.
+[Unsloth's Laya guidance](https://unsloth.ai/docs/models/decision-laya) advises using the selected option's probability rather than its `confidence` field.
 
-An answer with a probability of `0.80` can still be wrong. If a model is well calibrated on my tickets, I would expect roughly 80% of the answers assigned probabilities around 0.80 to be correct across many examples. That says something about a group of predictions, not a guarantee about the ticket in front of me. [TypeSafe&#39;s confidence documentation](https://docs.typesafe.ai/confidence) explains calibration in more detail.
+An answer at `0.80` can still be wrong. If the model is calibrated on my ticket distribution, predictions near `0.80` should be correct at roughly that rate across many examples.
 
-I'll need labeled examples to choose a threshold for this workflow. Too low, and I risk routing more tickets incorrectly. Too high, and I may send nearly everything to a person. I want to measure both the review rate and the accuracy of the tickets that get routed automatically.
+I have not tested whether Laya's probabilities are calibrated on my tickets. [TypeSafe's confidence documentation](https://docs.typesafe.ai/confidence) explains the concept, but my workflow still needs its own labeled evaluation.
 
-I also would not compare Laya's option probabilities directly with an LLM writing "I am 95% confident." A generated confidence percentage is not the same measurement.
+A low threshold risks incorrect routing. A high threshold may send nearly everything to review. The useful measures are review rate and accuracy among automatically accepted cases.
+
+An LLM writing "I am 95% confident" does not provide a comparable probability.
 
 ## When would I use this
 
-Ticket routing is where I would start, because I can define the available teams and check the answers against a policy. Tagging or triage could be worth trying for the same reason, provided the task is similarly bounded.
+Ticket routing is a reasonable starting point because the choices and policy can be defined and evaluated. Bounded tagging and triage may fit for the same reason.
 
-For reliable fields and explicit rules, I'll keep using ordinary code. For a drafted reply or a summary, I'd use an LLM. In the ticket workflow I can imagine using both models: one to select the team, then the LLM to help draft a response after the routing and review checks.
+For reliable fields and explicit rules, I would use ordinary code. For drafting or summarization, I would use an LLM.
 
-Next I'll repeat the runs with ambiguous tickets and use the same reply-generating model in both paths. There's also a guide to training a decision model with [Unsloth](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth), but I'll leave that for later.
+The combined workflow is the interesting one: a decision model judges, code validates and acts, and an LLM drafts a reply from the recorded outcome.
+
+The useful boundary was not decision model versus LLM. It was judgment versus action.
+
+Laya could classify the request, and an LLM could explain it. Neither should claim that my application did something it never did.
 
 ## Further reading
 
